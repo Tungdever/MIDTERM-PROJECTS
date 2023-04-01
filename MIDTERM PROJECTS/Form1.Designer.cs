@@ -73,7 +73,7 @@ namespace MIDTERM_PROJECTS
             this.pnlControls.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlControls.Location = new System.Drawing.Point(0, 0);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(425, 450);
+            this.pnlControls.Size = new System.Drawing.Size(425, 449);
             this.pnlControls.TabIndex = 0;
             this.pnlControls.Click += new System.EventHandler(this.pnlControls_Click);
             // 
@@ -91,7 +91,6 @@ namespace MIDTERM_PROJECTS
             this.cbbStyle.Name = "cbbStyle";
             this.cbbStyle.Size = new System.Drawing.Size(186, 37);
             this.cbbStyle.TabIndex = 0;
-            this.cbbStyle.SelectedIndex = 0;
             // 
             // btnStyle
             // 
@@ -240,24 +239,27 @@ namespace MIDTERM_PROJECTS
             // 
             // pnlMain
             // 
+            this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(425, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(375, 450);
+            this.pnlMain.Size = new System.Drawing.Size(873, 449);
             this.pnlMain.TabIndex = 1;
+            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             this.pnlMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseClick);
             this.pnlMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDown);
+            this.pnlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseMove);
+            this.pnlMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseUp);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1298, 449);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlControls);
             this.Name = "Form1";
             this.Text = "Form1";
-         
             this.pnlControls.ResumeLayout(false);
             this.ResumeLayout(false);
 

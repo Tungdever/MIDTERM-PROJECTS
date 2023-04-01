@@ -10,8 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using static System.Windows.Forms.LinkLabel;
+
 namespace MIDTERM_PROJECTS
 {
+
     public partial class Form1 : Form
     {
         Graphics gp;
@@ -30,12 +33,19 @@ namespace MIDTERM_PROJECTS
         bool isArc = false;
         bool isPolygon = false;
         bool isFillPolygon = false;
-        
         int numSides;
-        
+        bool isLineSelected = false;
+        bool isPaint = true;
         List<Point> lSides;
-
-        
+        List<Line> lines = new List<Line>();
+        int lineItemSelected;
+        int x, y;
+        public static void Swap(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
         public Form1()
         {
             InitializeComponent();
@@ -105,6 +115,8 @@ namespace MIDTERM_PROJECTS
                     if (this.isLine)
                     {
                         gp.DrawLine(myPen, beginPoint, endPoint);
+                        Line newLine = new Line(beginPoint, endPoint);
+                        lines.Add(newLine);
                         this.isLine = false;
                     }
                     else if (this.isEllipse)
@@ -164,10 +176,29 @@ namespace MIDTERM_PROJECTS
                    
                 }
             }
+            else
+            {
+                for (int i = 0; i < lines.Count(); i++)
+                {
+                    int x1 = lines[i].p1.X;
+                    int x2 = lines[i].p2.X;
+                    int y1 = lines[i].p1.Y;
+                    int y2 = lines[i].p2.Y;
+                    if (x1 > x2) Swap(ref x1, ref x2);
+                    if (y1 > y2) Swap(ref y1, ref y2);
+                    if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                    {
+                        lineItemSelected = i;
+                        isLineSelected = true;
+                        x = e.X; y = e.Y;
+                    }
+                }
+            }
         }
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
+            this.isPaint = false;
             this.pnlMain.Refresh();
         }
 
@@ -280,6 +311,35 @@ namespace MIDTERM_PROJECTS
         {
             this.cbbStyle.Hide();
             
+        }
+        private void pnlMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isLineSelected)
+            {
+                int deltaX = e.X - x;
+                int deltaY = e.Y - y;
+                lines[lineItemSelected].p1.X += deltaX;
+                lines[lineItemSelected].p1.Y += deltaY;
+                lines[lineItemSelected].p2.X += deltaX;
+                lines[lineItemSelected].p2.Y += deltaY;
+                x = e.X; y = e.Y;
+                Refresh(); // Invalidate the control to update the display
+            }
+        }
+        private void pnlMain_MouseUp(object sender, MouseEventArgs e)
+        {
+            isLineSelected = false;
+        }
+
+        private void pnlMain_Paint(object sender, PaintEventArgs e)
+        {
+            if (isPaint)
+            {
+                foreach (Line line in lines)
+                {
+                    line.draw(gp, myPen);
+                }
+            }
         }
     }
 }
