@@ -38,8 +38,11 @@ namespace MIDTERM_PROJECTS
         bool isPaint = true;
         List<Point> lSides;
         List<Line> lines = new List<Line>();
+        List<Elipse> elipses= new List<Elipse>();
         int lineItemSelected;
+        int elipseItemSelected;
         int x, y;
+        int iter = 0;
         public static void Swap(ref int a, ref int b)
         {
             int temp = a;
@@ -114,15 +117,18 @@ namespace MIDTERM_PROJECTS
                     endPoint.Y = e.Y;
                     if (this.isLine)
                     {
-                        gp.DrawLine(myPen, beginPoint, endPoint);
-                        Line newLine = new Line(beginPoint, endPoint);
+                        Line newLine = new Line(beginPoint, endPoint, myPen);
+                        newLine.draw(gp);
                         lines.Add(newLine);
+                        if (lines.Count() > iter) iter = lines.Count();
                         this.isLine = false;
                     }
                     else if (this.isEllipse)
                     {
-                        RectangleF myRectangleF = new RectangleF(beginPoint, new Size(endPoint.X - beginPoint.X, endPoint.Y - beginPoint.Y));
-                        gp.DrawEllipse(myPen, myRectangleF);
+                        Elipse newElipse = new Elipse(myPen, beginPoint, endPoint);
+                        newElipse.draw(gp);
+                        elipses.Add(newElipse);
+                        if (elipses.Count() > iter) iter = elipses.Count();
                         this.isEllipse= false;
                     }
                     else if (this.isFillElipse)
@@ -178,20 +184,29 @@ namespace MIDTERM_PROJECTS
             }
             else
             {
-                for (int i = 0; i < lines.Count(); i++)
+                
+                for (int i = 0; i < iter; i++)
                 {
-                    int x1 = lines[i].p1.X;
-                    int x2 = lines[i].p2.X;
-                    int y1 = lines[i].p1.Y;
-                    int y2 = lines[i].p2.Y;
-                    if (x1 > x2) Swap(ref x1, ref x2);
-                    if (y1 > y2) Swap(ref y1, ref y2);
-                    if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                    int x1;
+                    int x2;
+                    int y1;
+                    int y2;
+                    if (i < lines.Count())
                     {
-                        lineItemSelected = i;
-                        isLineSelected = true;
-                        x = e.X; y = e.Y;
-                    }
+                        x1 = lines[i].p1.X;
+                        x2 = lines[i].p2.X;
+                        y1 = lines[i].p1.Y;
+                        y2 = lines[i].p2.Y;
+                        if (x1 > x2) Swap(ref x1, ref x2);
+                        if (y1 > y2) Swap(ref y1, ref y2);
+                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        {
+                            lineItemSelected = i;
+                            isLineSelected = true;
+                            x = e.X; y = e.Y;
+                        }
+                    }               
+                    
                 }
             }
         }
@@ -330,14 +345,13 @@ namespace MIDTERM_PROJECTS
         {
             isLineSelected = false;
         }
-
         private void pnlMain_Paint(object sender, PaintEventArgs e)
         {
             if (isPaint)
             {
                 foreach (Line line in lines)
                 {
-                    line.draw(gp, myPen);
+                    line.draw(gp);
                 }
             }
         }
