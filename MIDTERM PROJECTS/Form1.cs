@@ -34,15 +34,12 @@ namespace MIDTERM_PROJECTS
         bool isPolygon = false;
         bool isFillPolygon = false;
         int numSides;
-        bool isLineSelected = false;
-        bool isPaint = true;
+        bool isSelected = false;       
         List<Point> lSides;
-        List<Line> lines = new List<Line>();
-        List<Elipse> elipses= new List<Elipse>();
-        int lineItemSelected;
-        int elipseItemSelected;
+        List<Graphic> graphics = new List<Graphic>();
+        int ItemSelected;
         int x, y;
-        int iter = 0;
+        
         public static void Swap(ref int a, ref int b)
         {
             int temp = a;
@@ -60,10 +57,19 @@ namespace MIDTERM_PROJECTS
         private void btnLine_Click(object sender, EventArgs e)
         {
             this.isLine = true;
+            this.isEllipse = false;
+            this.isFillElipse = false;
+            this.isRectangle = false;
+            this.isFillRectangle = false;
+            this.isCircle = false;
+            this.isFillCircle = false;
+            this.isArc = false;
+            this.isPolygon = false;
+            this.isFillPolygon = false;          
             isClickColtrols = true;
         }
 
-        public double DistanceTo(Point point1, Point point2)
+        public static double DistanceTo(Point point1, Point point2)
         {
             double deltaX = point2.X - point1.X;
             double deltaY = point2.Y - point1.Y;
@@ -115,53 +121,62 @@ namespace MIDTERM_PROJECTS
                     Point endPoint = new Point();
                     endPoint.X = e.X;
                     endPoint.Y = e.Y;
+                    if (endPoint.X < beginPoint.X)
+                    {
+                        Point tmp = beginPoint;
+                        beginPoint = endPoint;
+                        endPoint = tmp;
+                    }
                     if (this.isLine)
                     {
-                        Line newLine = new Line(beginPoint, endPoint, myPen);
-                        newLine.draw(gp);
-                        lines.Add(newLine);
-                        if (lines.Count() > iter) iter = lines.Count();
+                        Line newLine = new Line(beginPoint, endPoint, myPen);                       
+                        graphics.Add(newLine);
+                        graphics[graphics.Count - 1].Draw(gp);                        
                         this.isLine = false;
                     }
                     else if (this.isEllipse)
                     {
-                        Elipse newElipse = new Elipse(myPen, beginPoint, endPoint);
-                        newElipse.draw(gp);
-                        elipses.Add(newElipse);
-                        if (elipses.Count() > iter) iter = elipses.Count();
+                        Elipse newElipse = new Elipse(myPen, beginPoint, endPoint);                        
+                        graphics.Add(newElipse);
+                        graphics[graphics.Count - 1].Draw(gp);
                         this.isEllipse = false;
                     }
                     else if (this.isFillElipse)
                     {
-                        RectangleF myRectangleF = new RectangleF(beginPoint, new Size(endPoint.X - beginPoint.X, endPoint.Y - beginPoint.Y));
                         Brush myBrush = new SolidBrush(myColor);
-                        gp.FillEllipse(myBrush, myRectangleF);
+                        FillElipse newFillElipse = new FillElipse(myBrush, beginPoint, endPoint);
+                        graphics.Add(newFillElipse);
+                        graphics[graphics.Count - 1].Draw(gp);
                         this.isFillElipse = false;
                     }
                     else if (this.isRectangle)
                     {
-                        Rectangle myRectangle = new Rectangle(beginPoint, new Size(endPoint.X - beginPoint.X, endPoint.Y - beginPoint.Y));
-                        gp.DrawRectangle(myPen, myRectangle);
+                        RectangleGraphic newRectangle = new RectangleGraphic(myPen, beginPoint, endPoint);
+                        graphics.Add(newRectangle);
+                        graphics[graphics.Count - 1].Draw(gp);                      
                         this.isRectangle = false;
                     }
                     else if (this.isFillRectangle)
                     {
-                        Rectangle myRectangle = new Rectangle(beginPoint, new Size(endPoint.X - beginPoint.X, endPoint.Y - beginPoint.Y));
                         Brush myBrush = new SolidBrush(myColor);
-                        gp.FillRectangle(myBrush, myRectangle);
+                        FillRectangle newFillRectangle = new FillRectangle(myBrush, beginPoint, endPoint);
+                        graphics.Add(newFillRectangle);
+                        graphics[graphics.Count - 1].Draw(gp);
                         this.isFillRectangle = false;
                     }
                     else if (this.isCircle)
                     {
-                        double rad = DistanceTo(beginPoint, endPoint);
-                        gp.DrawEllipse(myPen, beginPoint.X, beginPoint.Y, (int)rad, (int)rad);
+                        Circle newCircle = new Circle(myPen, beginPoint, endPoint);
+                        graphics.Add(newCircle);
+                        graphics[graphics.Count - 1].Draw(gp);
                         this.isCircle = false;
                     }
                     else if (this.isFillCircle)
                     {
-                        double rad = DistanceTo(beginPoint, endPoint);
                         Brush myBrush = new SolidBrush(myColor);
-                        gp.FillEllipse(myBrush, beginPoint.X, beginPoint.Y, (int)rad, (int)rad);
+                        FillCircle newFillCircle = new FillCircle(myBrush, beginPoint, endPoint);
+                        graphics.Add(newFillCircle);
+                        graphics[graphics.Count - 1].Draw(gp);                       
                         this.isFillCircle = false;
                     }
                     else if (this.isArc)
@@ -184,75 +199,237 @@ namespace MIDTERM_PROJECTS
             }
             else
             {
-                for (int i = 0; i < lines.Count(); i++)
+                for (int i = graphics.Count() - 1 ; i >= 0; i--) 
                 {
-                    int x1 = lines[i].p1.X;
-                    int x2 = lines[i].p2.X;
-                    int y1 = lines[i].p1.Y;
-                    int y2 = lines[i].p2.Y;
-                    if (x1 > x2) Swap(ref x1, ref x2);
-                    if (y1 > y2) Swap(ref y1, ref y2);
-                    if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                    if (graphics[i] is Line line)
                     {
-                        lineItemSelected = i;
-                        isLineSelected = true;
-                        x = e.X; y = e.Y;
+                        int x1 = line.p1.X;
+                        int x2 = line.p2.X;
+                        int y1 = line.p1.Y;
+                        int y2 = line.p2.Y;
+                        if (x1 > x2) Swap(ref x1, ref x2);
+                        if (y1 > y2) Swap(ref y1, ref y2);
+                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        {
+                            ItemSelected = i;
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            break;
+                        }                      
                     }
+                    else if (graphics[i] is Elipse elipse)
+                    {
+                        int x1 = elipse.p1.X;
+                        int x2 = elipse.p2.X;
+                        int y1 = elipse.p1.Y;
+                        int y2 = elipse.p2.Y;
+                        if (x1 > x2) Swap(ref x1, ref x2);
+                        if (y1 > y2) Swap(ref y1, ref y2);
+                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        {
+                            ItemSelected = i;
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            break;
+                        }
+                    }
+                    else if (graphics[i] is FillElipse fill_elipse)
+                    {
+                        int x1 = fill_elipse.p1.X;
+                        int x2 = fill_elipse.p2.X;
+                        int y1 = fill_elipse.p1.Y;
+                        int y2 = fill_elipse.p2.Y;
+                        if (x1 > x2) Swap(ref x1, ref x2);
+                        if (y1 > y2) Swap(ref y1, ref y2);
+                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        {
+                            ItemSelected = i;
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            break;
+                        }
+                    }
+                    else if (graphics[i] is RectangleGraphic rectangle)
+                    {
+                        int x1 = rectangle.p1.X;
+                        int x2 = rectangle.p2.X;
+                        int y1 = rectangle.p1.Y;
+                        int y2 = rectangle.p2.Y;
+                        if (x1 > x2) Swap(ref x1, ref x2);
+                        if (y1 > y2) Swap(ref y1, ref y2);
+                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        {
+                            ItemSelected = i;
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            break;
+                        }
+                    }
+                    else if (graphics[i] is FillRectangle fill_rectangle)
+                    {
+                        int x1 = fill_rectangle.p1.X;
+                        int x2 = fill_rectangle.p2.X;
+                        int y1 = fill_rectangle.p1.Y;
+                        int y2 = fill_rectangle.p2.Y;
+                        if (x1 > x2) Swap(ref x1, ref x2);
+                        if (y1 > y2) Swap(ref y1, ref y2);
+                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        {
+                            ItemSelected = i;
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            break;
+                        }
+                    }
+                    else if (graphics[i] is Circle circle)
+                    {
+                        int x1 = circle.p1.X;
+                        int x2 = circle.p2.X;
+                        int y1 = circle.p1.Y;
+                        int y2 = circle.p2.Y;
+                        if (x1 > x2) Swap(ref x1, ref x2);
+                        if (y1 > y2) Swap(ref y1, ref y2);
+                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        {
+                            ItemSelected = i;
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            break;
+                        }
+                    }
+                    else if (graphics[i] is FillCircle fill_circle)
+                    {
+                        int x1 = fill_circle.p1.X;
+                        int x2 = fill_circle.p2.X;
+                        int y1 = fill_circle.p1.Y;
+                        int y2 = fill_circle.p2.Y;
+                        if (x1 > x2) Swap(ref x1, ref x2);
+                        if (y1 > y2) Swap(ref y1, ref y2);
+                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        {
+                            ItemSelected = i;
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            break;
+                        }
+                    }
+
                 }
-
-
             }
-            
+
         }
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
-            this.isPaint = false;
-            this.pnlMain.Refresh();
+           this.graphics.Clear();           
+           Refresh();
         }
 
         private void btnEllipse_Click(object sender, EventArgs e)
         {
+            this.isLine = false;
             this.isEllipse = true;
+            this.isFillElipse = false;
+            this.isRectangle = false;
+            this.isFillRectangle = false;
+            this.isCircle = false;
+            this.isFillCircle = false;
+            this.isArc = false;
+            this.isPolygon = false;
+            this.isFillPolygon = false;
             this.isClickColtrols=true;
         }
 
         private void btnFilled_Ellipse_Click(object sender, EventArgs e)
         {
+            this.isLine = false;
+            this.isEllipse = false;
             this.isFillElipse = true;
+            this.isRectangle = false;
+            this.isFillRectangle = false;
+            this.isCircle = false;
+            this.isFillCircle = false;
+            this.isArc = false;
+            this.isPolygon = false;
+            this.isFillPolygon = false;
             this.isClickColtrols = true;
-            bool isBrush = true;
+            
         }
 
         private void btnrectangle_Click(object sender, EventArgs e)
         {
+            this.isLine = false;
+            this.isEllipse = false;
+            this.isFillElipse = false;
             this.isRectangle = true;
+            this.isFillRectangle = false;
+            this.isCircle = false;
+            this.isFillCircle = false;
+            this.isArc = false;
+            this.isPolygon = false;
+            this.isFillPolygon = false;
             this.isClickColtrols = true;
         }
 
         private void btnFilled_Rectangle_Click(object sender, EventArgs e)
         {
+            this.isLine = false;
+            this.isEllipse = false;
+            this.isFillElipse = false;
+            this.isRectangle = false;
             this.isFillRectangle = true;
+            this.isCircle = false;
+            this.isFillCircle = false;
+            this.isArc = false;
+            this.isPolygon = false;
+            this.isFillPolygon = false;
             this.isClickColtrols = true;
-            bool isBrush = true;
+            
         }
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
+            this.isLine = false;
+            this.isEllipse = false;
+            this.isFillElipse = false;
+            this.isRectangle = false;
+            this.isFillRectangle = false;
             this.isCircle = true;
+            this.isFillCircle = false;
+            this.isArc = false;
+            this.isPolygon = false;
+            this.isFillPolygon = false;
             this.isClickColtrols = true;
         }
 
         private void btnFilled_Circle_Click(object sender, EventArgs e)
         {
+            this.isLine = false;
+            this.isEllipse = false;
+            this.isFillElipse = false;
+            this.isRectangle = false;
+            this.isFillRectangle = false;
+            this.isCircle = false;
             this.isFillCircle = true;
+            this.isArc = false;
+            this.isPolygon = false;
+            this.isFillPolygon = false;
             this.isClickColtrols = true;
-            bool isBrush = true;
+            
         }
 
         private void btnArc_Click(object sender, EventArgs e)
         {
+            this.isLine = false;
+            this.isEllipse = false;
+            this.isFillElipse = false;
+            this.isRectangle = false;
+            this.isFillRectangle = false;
+            this.isCircle = false;
+            this.isFillCircle = false;
             this.isArc = true;
+            this.isPolygon = false;
+            this.isFillPolygon = false;
             this.isClickColtrols = true;
         }
 
@@ -270,7 +447,16 @@ namespace MIDTERM_PROJECTS
                 return;
             }
             lSides = new List<Point>();
+            this.isLine = false;
+            this.isEllipse = false;
+            this.isFillElipse = false;
+            this.isRectangle = false;
+            this.isFillRectangle = false;
+            this.isCircle = false;
+            this.isFillCircle = false;
+            this.isArc = false;
             this.isPolygon = true;
+            this.isFillPolygon = false;
             this.isClickColtrols = true;
         }
 
@@ -288,9 +474,18 @@ namespace MIDTERM_PROJECTS
                 return;
             }
             lSides = new List<Point>();
+            this.isLine = false;
+            this.isEllipse = false;
+            this.isFillElipse = false;
+            this.isRectangle = false;
+            this.isFillRectangle = false;
+            this.isCircle = false;
+            this.isFillCircle = false;
+            this.isArc = false;
+            this.isPolygon = false;
             this.isFillPolygon = true;
             this.isClickColtrols = true;
-            bool isBrush = true;
+            
         }
 
         private void btnColor_Click(object sender, EventArgs e)
@@ -323,30 +518,73 @@ namespace MIDTERM_PROJECTS
         }
         private void pnlMain_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isLineSelected)
+            if (isSelected)
             {
                 int deltaX = e.X - x;
                 int deltaY = e.Y - y;
-                lines[lineItemSelected].p1.X += deltaX;
-                lines[lineItemSelected].p1.Y += deltaY;
-                lines[lineItemSelected].p2.X += deltaX;
-                lines[lineItemSelected].p2.Y += deltaY;
-                x = e.X; y = e.Y;
-                Refresh(); // Invalidate the control to update the display
+                if (graphics[ItemSelected] is Line lineObject)
+                {
+                    lineObject.p1.X += deltaX;
+                    lineObject.p1.Y += deltaY;
+                    lineObject.p2.X += deltaX;
+                    lineObject.p2.Y += deltaY;
+                }
+             
+                else if (graphics[ItemSelected] is Elipse elipseObject)
+                {
+                    elipseObject.p1.X += deltaX;
+                    elipseObject.p1.Y += deltaY;
+                    elipseObject.p2.X += deltaX;
+                    elipseObject.p2.Y += deltaY;
+                }
+                else if (graphics[ItemSelected] is FillElipse fillElipseObject)
+                {
+                    fillElipseObject.p1.X += deltaX;
+                    fillElipseObject.p1.Y += deltaY;
+                    fillElipseObject.p2.X += deltaX;
+                    fillElipseObject.p2.Y += deltaY;
+                }
+                else if (graphics[ItemSelected] is RectangleGraphic rectangleObject)
+                {
+                    rectangleObject.p1.X += deltaX;
+                    rectangleObject.p1.Y += deltaY;
+                    rectangleObject.p2.X += deltaX;
+                    rectangleObject.p2.Y += deltaY;
+                }
+                else if (graphics[ItemSelected] is FillRectangle fillRectangleObject)
+                {
+                    fillRectangleObject.p1.X += deltaX;
+                    fillRectangleObject.p1.Y += deltaY;
+                    fillRectangleObject.p2.X += deltaX;
+                    fillRectangleObject.p2.Y += deltaY;
+                }
+                else if (graphics[ItemSelected] is Circle circleObject)
+                {
+                    circleObject.p1.X += deltaX;
+                    circleObject.p1.Y += deltaY;
+                    circleObject.p2.X += deltaX;
+                    circleObject.p2.Y += deltaY;
+                }
+                else if (graphics[ItemSelected] is FillCircle fillCircleObject)
+                {
+                    fillCircleObject.p1.X += deltaX;
+                    fillCircleObject.p1.Y += deltaY;
+                    fillCircleObject.p2.X += deltaX;
+                    fillCircleObject.p2.Y += deltaY;
+                }
+                    x = e.X; y = e.Y;
+                Refresh(); 
             }
         }
         private void pnlMain_MouseUp(object sender, MouseEventArgs e)
         {
-            isLineSelected = false;
+            isSelected = false;
         }
         private void pnlMain_Paint(object sender, PaintEventArgs e)
         {
-            if (isPaint)
+            foreach (Graphic graphic in graphics)
             {
-                foreach (Line line in lines)
-                {
-                    line.draw(gp);
-                }
+                graphic.Draw(gp);
             }
         }
     }

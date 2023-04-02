@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MIDTERM_PROJECTS
 {
-    public class Elipse
+    public class Elipse : Graphic
     {
         public Point p1;
         public Point p2;
@@ -19,10 +19,12 @@ namespace MIDTERM_PROJECTS
             this.p2 = p2;
             this.myPen = myPen;
         }
-        public void draw(Graphics gp)
+        public override void Draw(Graphics gp)
         {
             RectangleF myRectangleF = new RectangleF(p1, new Size(p2.X - p1.X, p2.Y - p1.Y));
             gp.DrawEllipse(myPen, myRectangleF);
         }
+
+       
     }
 }

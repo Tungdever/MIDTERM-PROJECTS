@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 
 namespace MIDTERM_PROJECTS
 {
-    public class Line : Graphic
+    public class FillRectangle : Graphic
     {
         public Point p1;
         public Point p2;
-        public Pen myPen;
-        public Line(Point p1, Point p2, Pen myPen)
+        public Brush myBrush;
+        public FillRectangle(Brush myBrush, Point p1, Point p2)
         {
             this.p1 = p1;
             this.p2 = p2;
-            this.myPen = myPen;
+            this.myBrush = myBrush;
         }
         public override void Draw(Graphics gp)
         {
-            gp.DrawLine(myPen, p1, p2);   
+            RectangleF myRectangleF = new RectangleF(p1, new Size(p2.X - p1.X, p2.Y - p1.Y));
+            gp.FillRectangle(myBrush, myRectangleF);
         }
     }
 }

@@ -73,7 +73,7 @@ namespace MIDTERM_PROJECTS
             this.pnlControls.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlControls.Location = new System.Drawing.Point(0, 0);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(425, 449);
+            this.pnlControls.Size = new System.Drawing.Size(425, 708);
             this.pnlControls.TabIndex = 0;
             this.pnlControls.Click += new System.EventHandler(this.pnlControls_Click);
             // 
@@ -87,14 +87,14 @@ namespace MIDTERM_PROJECTS
             System.Drawing.Drawing2D.DashStyle.Dot,
             System.Drawing.Drawing2D.DashStyle.DashDot,
             System.Drawing.Drawing2D.DashStyle.DashDotDot});
-            this.cbbStyle.Location = new System.Drawing.Point(224, 330);
+            this.cbbStyle.Location = new System.Drawing.Point(219, 465);
             this.cbbStyle.Name = "cbbStyle";
             this.cbbStyle.Size = new System.Drawing.Size(186, 37);
             this.cbbStyle.TabIndex = 0;
             // 
             // btnStyle
             // 
-            this.btnStyle.Location = new System.Drawing.Point(224, 330);
+            this.btnStyle.Location = new System.Drawing.Point(219, 465);
             this.btnStyle.Name = "btnStyle";
             this.btnStyle.Size = new System.Drawing.Size(186, 38);
             this.btnStyle.TabIndex = 13;
@@ -104,7 +104,7 @@ namespace MIDTERM_PROJECTS
             // 
             // BtnClear
             // 
-            this.BtnClear.Location = new System.Drawing.Point(224, 385);
+            this.BtnClear.Location = new System.Drawing.Point(219, 520);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(186, 38);
             this.BtnClear.TabIndex = 11;
@@ -114,7 +114,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(17, 385);
+            this.btnRemove.Location = new System.Drawing.Point(12, 520);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(186, 38);
             this.btnRemove.TabIndex = 10;
@@ -123,7 +123,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnColor
             // 
-            this.btnColor.Location = new System.Drawing.Point(17, 330);
+            this.btnColor.Location = new System.Drawing.Point(12, 465);
             this.btnColor.Name = "btnColor";
             this.btnColor.Size = new System.Drawing.Size(186, 38);
             this.btnColor.TabIndex = 12;
@@ -133,7 +133,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnFilled_Polygon
             // 
-            this.btnFilled_Polygon.Location = new System.Drawing.Point(224, 270);
+            this.btnFilled_Polygon.Location = new System.Drawing.Point(219, 405);
             this.btnFilled_Polygon.Name = "btnFilled_Polygon";
             this.btnFilled_Polygon.Size = new System.Drawing.Size(186, 38);
             this.btnFilled_Polygon.TabIndex = 9;
@@ -143,7 +143,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnpPolygon
             // 
-            this.btnpPolygon.Location = new System.Drawing.Point(224, 205);
+            this.btnpPolygon.Location = new System.Drawing.Point(219, 340);
             this.btnpPolygon.Name = "btnpPolygon";
             this.btnpPolygon.Size = new System.Drawing.Size(186, 38);
             this.btnpPolygon.TabIndex = 8;
@@ -153,7 +153,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnArc
             // 
-            this.btnArc.Location = new System.Drawing.Point(224, 143);
+            this.btnArc.Location = new System.Drawing.Point(219, 278);
             this.btnArc.Name = "btnArc";
             this.btnArc.Size = new System.Drawing.Size(186, 38);
             this.btnArc.TabIndex = 7;
@@ -163,7 +163,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnFilled_Circle
             // 
-            this.btnFilled_Circle.Location = new System.Drawing.Point(224, 77);
+            this.btnFilled_Circle.Location = new System.Drawing.Point(219, 212);
             this.btnFilled_Circle.Name = "btnFilled_Circle";
             this.btnFilled_Circle.Size = new System.Drawing.Size(186, 38);
             this.btnFilled_Circle.TabIndex = 6;
@@ -173,7 +173,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnCircle
             // 
-            this.btnCircle.Location = new System.Drawing.Point(224, 12);
+            this.btnCircle.Location = new System.Drawing.Point(219, 147);
             this.btnCircle.Name = "btnCircle";
             this.btnCircle.Size = new System.Drawing.Size(186, 38);
             this.btnCircle.TabIndex = 5;
@@ -183,7 +183,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnFilled_Rectangle
             // 
-            this.btnFilled_Rectangle.Location = new System.Drawing.Point(17, 270);
+            this.btnFilled_Rectangle.Location = new System.Drawing.Point(12, 405);
             this.btnFilled_Rectangle.Name = "btnFilled_Rectangle";
             this.btnFilled_Rectangle.Size = new System.Drawing.Size(186, 38);
             this.btnFilled_Rectangle.TabIndex = 4;
@@ -193,7 +193,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnrectangle
             // 
-            this.btnrectangle.Location = new System.Drawing.Point(17, 205);
+            this.btnrectangle.Location = new System.Drawing.Point(12, 340);
             this.btnrectangle.Name = "btnrectangle";
             this.btnrectangle.Size = new System.Drawing.Size(186, 38);
             this.btnrectangle.TabIndex = 3;
@@ -203,7 +203,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnFilled_Ellipse
             // 
-            this.btnFilled_Ellipse.Location = new System.Drawing.Point(17, 143);
+            this.btnFilled_Ellipse.Location = new System.Drawing.Point(12, 278);
             this.btnFilled_Ellipse.Name = "btnFilled_Ellipse";
             this.btnFilled_Ellipse.Size = new System.Drawing.Size(186, 38);
             this.btnFilled_Ellipse.TabIndex = 2;
@@ -213,7 +213,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnEllipse
             // 
-            this.btnEllipse.Location = new System.Drawing.Point(17, 77);
+            this.btnEllipse.Location = new System.Drawing.Point(12, 212);
             this.btnEllipse.Name = "btnEllipse";
             this.btnEllipse.Size = new System.Drawing.Size(186, 38);
             this.btnEllipse.TabIndex = 1;
@@ -223,7 +223,7 @@ namespace MIDTERM_PROJECTS
             // 
             // btnLine
             // 
-            this.btnLine.Location = new System.Drawing.Point(17, 12);
+            this.btnLine.Location = new System.Drawing.Point(12, 147);
             this.btnLine.Name = "btnLine";
             this.btnLine.Size = new System.Drawing.Size(186, 38);
             this.btnLine.TabIndex = 0;
@@ -243,7 +243,7 @@ namespace MIDTERM_PROJECTS
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(425, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(873, 449);
+            this.pnlMain.Size = new System.Drawing.Size(873, 708);
             this.pnlMain.TabIndex = 1;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             this.pnlMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseClick);
@@ -255,7 +255,7 @@ namespace MIDTERM_PROJECTS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1298, 449);
+            this.ClientSize = new System.Drawing.Size(1298, 708);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlControls);
             this.Name = "Form1";
