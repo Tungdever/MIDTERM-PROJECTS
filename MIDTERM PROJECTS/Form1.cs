@@ -83,10 +83,10 @@ namespace MIDTERM_PROJECTS
                     lSides.Add(newPoint);
                     if (this.lSides.Count == numSides)
                     {
-                        
+
                         Point[] arrPoint = lSides.ToArray();
                         gp.DrawPolygon(myPen, arrPoint);
-                        this.isPolygon= false;
+                        this.isPolygon = false;
                         this.isClickColtrols = false;
                     }
                 }
@@ -101,7 +101,7 @@ namespace MIDTERM_PROJECTS
                         gp.FillPolygon(myBrush, arrPoint);
                         this.isFillPolygon = false;
                         this.isClickColtrols = false;
-                        
+
                     }
                 }
                 else if (this.isStart)
@@ -129,20 +129,20 @@ namespace MIDTERM_PROJECTS
                         newElipse.draw(gp);
                         elipses.Add(newElipse);
                         if (elipses.Count() > iter) iter = elipses.Count();
-                        this.isEllipse= false;
+                        this.isEllipse = false;
                     }
                     else if (this.isFillElipse)
                     {
                         RectangleF myRectangleF = new RectangleF(beginPoint, new Size(endPoint.X - beginPoint.X, endPoint.Y - beginPoint.Y));
-                        Brush myBrush = new SolidBrush(myColor);                      
+                        Brush myBrush = new SolidBrush(myColor);
                         gp.FillEllipse(myBrush, myRectangleF);
-                        this.isFillElipse= false;
+                        this.isFillElipse = false;
                     }
                     else if (this.isRectangle)
                     {
                         Rectangle myRectangle = new Rectangle(beginPoint, new Size(endPoint.X - beginPoint.X, endPoint.Y - beginPoint.Y));
                         gp.DrawRectangle(myPen, myRectangle);
-                        this.isRectangle= false;
+                        this.isRectangle = false;
                     }
                     else if (this.isFillRectangle)
                     {
@@ -151,10 +151,10 @@ namespace MIDTERM_PROJECTS
                         gp.FillRectangle(myBrush, myRectangle);
                         this.isFillRectangle = false;
                     }
-                    else if (this.isCircle) 
-                    {                 
-                        double rad = DistanceTo(beginPoint, endPoint);                        
-                        gp.DrawEllipse(myPen, beginPoint.X,beginPoint.Y, (int)rad, (int)rad);
+                    else if (this.isCircle)
+                    {
+                        double rad = DistanceTo(beginPoint, endPoint);
+                        gp.DrawEllipse(myPen, beginPoint.X, beginPoint.Y, (int)rad, (int)rad);
                         this.isCircle = false;
                     }
                     else if (this.isFillCircle)
@@ -169,46 +169,40 @@ namespace MIDTERM_PROJECTS
                         int r = (int)Math.Sqrt((endPoint.X - beginPoint.X) * (endPoint.X - beginPoint.X) + (endPoint.Y - beginPoint.Y) * (endPoint.Y - beginPoint.Y));
                         int x = beginPoint.X - r;
                         int y = beginPoint.Y - r;
-                        int width = 2 * r;  
+                        int width = 2 * r;
                         int height = 2 * r;
                         int startAngle = (int)(180 / Math.PI * Math.Atan2(endPoint.Y - beginPoint.Y, endPoint.X - beginPoint.X));
                         int endAngle = (int)(180 / Math.PI * Math.Atan2(endPoint.X - beginPoint.X, endPoint.X - beginPoint.X));
-                        gp.DrawArc(myPen,x, y, width, height, startAngle, endAngle);
+                        gp.DrawArc(myPen, x, y, width, height, startAngle, endAngle);
                         this.isArc = false;
                     }
-                    
+
                     this.isStart = true;
                     this.isClickColtrols = false;
-                   
+
                 }
             }
             else
             {
-                
-                for (int i = 0; i < iter; i++)
+                for (int i = 0; i < lines.Count(); i++)
                 {
-                    int x1;
-                    int x2;
-                    int y1;
-                    int y2;
-                    if (i < lines.Count())
+                    int x1 = lines[i].p1.X;
+                    int x2 = lines[i].p2.X;
+                    int y1 = lines[i].p1.Y;
+                    int y2 = lines[i].p2.Y;
+                    if (x1 > x2) Swap(ref x1, ref x2);
+                    if (y1 > y2) Swap(ref y1, ref y2);
+                    if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
                     {
-                        x1 = lines[i].p1.X;
-                        x2 = lines[i].p2.X;
-                        y1 = lines[i].p1.Y;
-                        y2 = lines[i].p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (y1 > y2) Swap(ref y1, ref y2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
-                        {
-                            lineItemSelected = i;
-                            isLineSelected = true;
-                            x = e.X; y = e.Y;
-                        }
-                    }               
-                    
+                        lineItemSelected = i;
+                        isLineSelected = true;
+                        x = e.X; y = e.Y;
+                    }
                 }
+
+
             }
+            
         }
 
         private void BtnClear_Click(object sender, EventArgs e)
