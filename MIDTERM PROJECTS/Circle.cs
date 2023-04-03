@@ -10,13 +10,9 @@ namespace MIDTERM_PROJECTS
 {
     public class Circle : Graphic
     {
-        public Point p1;
-        public Point p2;
         public Pen myPen;
-        public Circle(Pen myPen, Point p1, Point p2)
+        public Circle(Pen myPen)
         {
-            this.p1 = p1;
-            this.p2 = p2;
             this.myPen = myPen;
         }
         public override void Draw(Graphics gp)
@@ -24,7 +20,6 @@ namespace MIDTERM_PROJECTS
             double rad = Form1.DistanceTo(p1, p2);
             gp.DrawEllipse(myPen, p1.X, p1.Y, (int)rad, (int)rad);
         }
-
         public override void Move(int deltaX, int deltaY)
         {
             p1.X += deltaX;

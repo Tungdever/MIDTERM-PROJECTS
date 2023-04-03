@@ -10,13 +10,9 @@ namespace MIDTERM_PROJECTS
 {
     public class Elipse : Graphic
     {
-        public Point p1;
-        public Point p2;
         public Pen myPen;
-        public Elipse(Pen myPen, Point p1, Point p2)
-        {
-            this.p1 = p1;
-            this.p2 = p2;
+        public Elipse(Pen myPen)
+        {          
             this.myPen = myPen;
         }
         public override void Draw(Graphics gp)

@@ -51,6 +51,7 @@
     <Compile Include="Elipse.cs" />
     <Compile Include="FillCircle.cs" />
     <Compile Include="FillElipse.cs" />
+    <Compile Include="FillPolygon.cs" />
     <Compile Include="FillRectangle.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

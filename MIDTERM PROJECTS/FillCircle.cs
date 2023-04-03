@@ -9,13 +9,10 @@ namespace MIDTERM_PROJECTS
 {
     public class FillCircle : Graphic
     {
-        public Point p1;
-        public Point p2;
+
         public Brush myBrush;
-        public FillCircle(Brush myBrush, Point p1, Point p2)
+        public FillCircle(Brush myBrush)
         {
-            this.p1 = p1;
-            this.p2 = p2;
             this.myBrush = myBrush;
         }
         public override void Draw(Graphics gp)

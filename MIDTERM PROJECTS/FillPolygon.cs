@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace MIDTERM_PROJECTS
 {
-    public class Polygon :  Graphic
+    public class FillPolygon: Graphic
     {
         public List<Point> lPoint;
-        public Pen myPen;
-        public Polygon(List<Point> lPoint, Pen myPen)
+        public Brush myBrush;
+        public FillPolygon(List<Point> lPoint, Brush myBrush)
         {
             this.lPoint = lPoint;
-            this.myPen = myPen;
-            
+            this.myBrush = myBrush;
         }
         public override void Move(int deltaX, int deltaY)
         {
@@ -28,7 +27,7 @@ namespace MIDTERM_PROJECTS
         public override void Draw(Graphics gp)
         {
             Point[] arrPoint = lPoint.ToArray();
-            gp.DrawPolygon(myPen, arrPoint);
+            gp.FillPolygon(myBrush, arrPoint);
         }
     }
 }

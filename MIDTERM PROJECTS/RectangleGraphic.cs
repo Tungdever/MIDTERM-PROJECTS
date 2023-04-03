@@ -9,13 +9,9 @@ namespace MIDTERM_PROJECTS
 {
     public class RectangleGraphic : Graphic
     {
-        public Point p1;
-        public Point p2;
         public Pen myPen;
-        public RectangleGraphic(Pen myPen, Point p1, Point p2)
+        public RectangleGraphic(Pen myPen)
         {
-            this.p1 = p1;
-            this.p2 = p2;
             this.myPen = myPen;
         }
         public override void Draw(Graphics gp)
