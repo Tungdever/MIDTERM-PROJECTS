@@ -23,5 +23,13 @@ namespace MIDTERM_PROJECTS
             RectangleF myRectangleF = new RectangleF(p1, new Size(p2.X - p1.X, p2.Y - p1.Y));
             gp.FillRectangle(myBrush, myRectangleF);
         }
+
+        public override void Move(int deltaX, int deltaY)
+        {
+            p1.X += deltaX;
+            p1.Y += deltaY;
+            p2.X += deltaX;
+            p2.Y += deltaY;
+        }
     }
 }

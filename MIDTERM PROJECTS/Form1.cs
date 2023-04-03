@@ -18,7 +18,6 @@ namespace MIDTERM_PROJECTS
     public partial class Form1 : Form
     {
         Graphics gp;
-        Pen myPen;
         Color myColor;
         bool isLine = false;
         bool isEllipse = false;
@@ -34,7 +33,12 @@ namespace MIDTERM_PROJECTS
         bool isPolygon = false;
         bool isFillPolygon = false;
         int numSides;
-        bool isSelected = false;       
+        bool isSelected = false;
+        bool isSolid = true;
+        bool isDash = false;
+        bool isDot = false;
+        bool isDashDot = false;
+        bool isDashDotDot = false;
         List<Point> lSides;
         List<Graphic> graphics = new List<Graphic>();
         int ItemSelected;
@@ -49,7 +53,8 @@ namespace MIDTERM_PROJECTS
         public Form1()
         {
             InitializeComponent();
-            gp = this.pnlMain.CreateGraphics();                     
+            gp = this.pnlMain.CreateGraphics();
+            
         }
 
         private void btnLine_Click(object sender, EventArgs e)
@@ -78,18 +83,21 @@ namespace MIDTERM_PROJECTS
             if (isClickColtrols)
             {
                 myColor = cldControls.Color;
-                myPen = new Pen(myColor, 5);
-                
-
+                Pen myPen = new Pen(myColor, 5);
+                if (isSolid) myPen.DashStyle = DashStyle.Solid;
+                else if (isDash) myPen.DashStyle = DashStyle.Dash;
+                else if (isDot) myPen.DashStyle = DashStyle.Dot;
+                else if (isDashDot) myPen.DashStyle = DashStyle.DashDot;
+                else if (isDashDotDot) myPen.DashStyle|= DashStyle.DashDotDot;
                 if (this.isPolygon)
                 {
                     Point newPoint = new Point(e.Location.X, e.Location.Y);
                     lSides.Add(newPoint);
                     if (this.lSides.Count == numSides)
                     {
-
-                        Point[] arrPoint = lSides.ToArray();
-                        gp.DrawPolygon(myPen, arrPoint);
+                        Polygon newPolygon = new Polygon(lSides, myPen);
+                        graphics.Add(newPolygon);
+                        graphics[graphics.Count - 1].Draw(gp);
                         this.isPolygon = false;
                         this.isClickColtrols = false;
                     }
@@ -311,6 +319,27 @@ namespace MIDTERM_PROJECTS
                             break;
                         }
                     }
+                    else if (graphics[i] is Polygon polygon)
+                    {
+                        int xMin = int.MaxValue;
+                        int xMax = 0;
+                        int yMin = int.MinValue;
+                        int yMax = 0;
+                        foreach(Point point in polygon.lPoint)
+                        {
+                            if (point.X < xMin) xMin = point.X;
+                            if (point.X > xMax) xMax = point.X;
+                            if (point.Y < yMin) yMin = point.Y;
+                            if (point.Y > yMax) yMax = point.Y;
+                        }
+                        if (e.X >= xMin && e.X <= xMax && e.Y >= yMin && e.Y <= yMax)
+                        {
+                            ItemSelected = i;
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            break;
+                        }
+                    }
 
                 }
             }
@@ -506,55 +535,38 @@ namespace MIDTERM_PROJECTS
                 int deltaY = e.Y - y;
                 if (graphics[ItemSelected] is Line lineObject)
                 {
-                    lineObject.p1.X += deltaX;
-                    lineObject.p1.Y += deltaY;
-                    lineObject.p2.X += deltaX;
-                    lineObject.p2.Y += deltaY;
+                    lineObject.Move(deltaX, deltaY);
                 }
              
                 else if (graphics[ItemSelected] is Elipse elipseObject)
                 {
-                    elipseObject.p1.X += deltaX;
-                    elipseObject.p1.Y += deltaY;
-                    elipseObject.p2.X += deltaX;
-                    elipseObject.p2.Y += deltaY;
+                    elipseObject.Move(deltaX, deltaY);
                 }
                 else if (graphics[ItemSelected] is FillElipse fillElipseObject)
                 {
-                    fillElipseObject.p1.X += deltaX;
-                    fillElipseObject.p1.Y += deltaY;
-                    fillElipseObject.p2.X += deltaX;
-                    fillElipseObject.p2.Y += deltaY;
+                    fillElipseObject.Move(deltaX, deltaY);
                 }
                 else if (graphics[ItemSelected] is RectangleGraphic rectangleObject)
                 {
-                    rectangleObject.p1.X += deltaX;
-                    rectangleObject.p1.Y += deltaY;
-                    rectangleObject.p2.X += deltaX;
-                    rectangleObject.p2.Y += deltaY;
+                   rectangleObject.Move(deltaX, deltaY);    
                 }
                 else if (graphics[ItemSelected] is FillRectangle fillRectangleObject)
                 {
-                    fillRectangleObject.p1.X += deltaX;
-                    fillRectangleObject.p1.Y += deltaY;
-                    fillRectangleObject.p2.X += deltaX;
-                    fillRectangleObject.p2.Y += deltaY;
+                    fillRectangleObject.Move(deltaX, deltaY);
                 }
                 else if (graphics[ItemSelected] is Circle circleObject)
                 {
-                    circleObject.p1.X += deltaX;
-                    circleObject.p1.Y += deltaY;
-                    circleObject.p2.X += deltaX;
-                    circleObject.p2.Y += deltaY;
+                    circleObject.Move(deltaX, deltaY);
                 }
                 else if (graphics[ItemSelected] is FillCircle fillCircleObject)
                 {
-                    fillCircleObject.p1.X += deltaX;
-                    fillCircleObject.p1.Y += deltaY;
-                    fillCircleObject.p2.X += deltaX;
-                    fillCircleObject.p2.Y += deltaY;
+                    fillCircleObject.Move(deltaX, deltaY);
                 }
-                    x = e.X; y = e.Y;
+                else if (graphics[ItemSelected] is Polygon polygonObject)
+                {
+                    polygonObject.Move(deltaX, deltaY);
+                }
+                x = e.X; y = e.Y;
                 Refresh(); 
             }
         }
@@ -577,6 +589,43 @@ namespace MIDTERM_PROJECTS
         {
             this.graphics.Clear();
             Refresh();
+        }
+
+        
+
+        private void btnDashType_Click(object sender, EventArgs e)
+        {
+            isDash = true; isSolid = false; isDot = false; isDashDot = false; isDashDotDot = false;
+            btnsplitStyle.Text = btnDashType.Text;
+            btnsplitStyle.Image = global::MIDTERM_PROJECTS.Properties.Resources.dashed_line_64px;
+        }
+
+        private void btnDotType_Click(object sender, EventArgs e)
+        {
+            isDash = false; isSolid = false; isDot = true; isDashDot = false; isDashDotDot = false;
+            btnsplitStyle.Text = btnDotType.Text;
+            btnsplitStyle.Image = global::MIDTERM_PROJECTS.Properties.Resources.dotted_barline;
+        }
+
+        private void btnDashDotType_Click(object sender, EventArgs e)
+        {
+            isDash = false; isSolid = false; isDot = false; isDashDot = false; isDashDotDot = false;
+            btnsplitStyle.Text = btnDashDotType.Text;
+            btnsplitStyle.Image = global::MIDTERM_PROJECTS.Properties.Resources.dashed_line_240px;
+        }
+
+        private void btnDashDotDotType_Click(object sender, EventArgs e)
+        {
+            isDash = false; isSolid = false; isDot = false; isDashDot = false; isDashDotDot = true;
+            btnsplitStyle.Text = btnDashDotDotType.Text;
+            btnsplitStyle.Image = global::MIDTERM_PROJECTS.Properties.Resources.dashed_line_240px1;
+        }
+
+        private void btnSolidType_Click(object sender, EventArgs e)
+        {
+            isDash = false; isSolid = true; isDot = false; isDashDot = false; isDashDotDot = false;
+            btnsplitStyle.Text = btnSolidType.Text;
+            btnsplitStyle.Image = global::MIDTERM_PROJECTS.Properties.Resources.line_64px;
         }
 
         private void pnlMain_Paint(object sender, PaintEventArgs e)

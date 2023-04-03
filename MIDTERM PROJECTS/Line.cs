@@ -18,9 +18,18 @@ namespace MIDTERM_PROJECTS
             this.p2 = p2;
             this.myPen = myPen;
         }
+        
         public override void Draw(Graphics gp)
         {
             gp.DrawLine(myPen, p1, p2);   
+        }
+
+        public override void Move(int deltaX, int deltaY)
+        {
+            p1.X += deltaX;
+            p1.Y += deltaY;
+            p2.X += deltaX;
+            p2.Y += deltaY;
         }
     }
 }

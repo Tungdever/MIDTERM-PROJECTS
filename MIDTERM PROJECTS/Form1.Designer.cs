@@ -45,24 +45,24 @@ namespace MIDTERM_PROJECTS
             this.btnLine = new System.Windows.Forms.Button();
             this.cldControls = new System.Windows.Forms.ColorDialog();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.ptbColor = new System.Windows.Forms.PictureBox();
             this.pnlControls = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnsplitStyle = new System.Windows.Forms.ToolStripSplitButton();
-            this.styleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dashDotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dashDotDotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.btnClear = new System.Windows.Forms.ToolStripButton();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbColor)).BeginInit();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnsplitStyle = new System.Windows.Forms.ToolStripSplitButton();
+            this.btnSolidType = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDashType = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDotType = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDashDotType = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDashDotDotType = new System.Windows.Forms.ToolStripMenuItem();
+            this.ptbColor = new System.Windows.Forms.PictureBox();
             this.pnlControls.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             this.toolStrip3.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbColor)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFilled_Polygon
@@ -184,17 +184,6 @@ namespace MIDTERM_PROJECTS
             this.pnlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseMove);
             this.pnlMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseUp);
             // 
-            // ptbColor
-            // 
-            this.ptbColor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ptbColor.BackgroundImage")));
-            this.ptbColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ptbColor.Location = new System.Drawing.Point(617, 21);
-            this.ptbColor.Name = "ptbColor";
-            this.ptbColor.Size = new System.Drawing.Size(86, 38);
-            this.ptbColor.TabIndex = 13;
-            this.ptbColor.TabStop = false;
-            this.ptbColor.Click += new System.EventHandler(this.ptbColor_Click);
-            // 
             // pnlControls
             // 
             this.pnlControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -218,71 +207,30 @@ namespace MIDTERM_PROJECTS
             this.pnlControls.Size = new System.Drawing.Size(1298, 121);
             this.pnlControls.TabIndex = 14;
             // 
-            // toolStrip1
+            // toolStrip3
             // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnsplitStyle});
-            this.toolStrip1.Location = new System.Drawing.Point(617, 65);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(104, 38);
-            this.toolStrip1.TabIndex = 14;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip3.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnClear});
+            this.toolStrip3.Location = new System.Drawing.Point(611, 65);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(93, 38);
+            this.toolStrip3.TabIndex = 17;
+            this.toolStrip3.Text = "toolStrip3";
             // 
-            // btnsplitStyle
+            // btnClear
             // 
-            this.btnsplitStyle.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnsplitStyle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnsplitStyle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.styleToolStripMenuItem,
-            this.dashToolStripMenuItem,
-            this.dotToolStripMenuItem,
-            this.dashDotToolStripMenuItem,
-            this.dashDotDotToolStripMenuItem});
-            this.btnsplitStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnsplitStyle.Image = ((System.Drawing.Image)(resources.GetObject("btnsplitStyle.Image")));
-            this.btnsplitStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnsplitStyle.Name = "btnsplitStyle";
-            this.btnsplitStyle.Size = new System.Drawing.Size(101, 35);
-            this.btnsplitStyle.Text = "Style";
-            // 
-            // styleToolStripMenuItem
-            // 
-            this.styleToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("styleToolStripMenuItem.Image")));
-            this.styleToolStripMenuItem.Name = "styleToolStripMenuItem";
-            this.styleToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
-            this.styleToolStripMenuItem.Text = "Solid";
-            // 
-            // dashToolStripMenuItem
-            // 
-            this.dashToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dashToolStripMenuItem.Image")));
-            this.dashToolStripMenuItem.Name = "dashToolStripMenuItem";
-            this.dashToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
-            this.dashToolStripMenuItem.Text = "Dash";
-            // 
-            // dotToolStripMenuItem
-            // 
-            this.dotToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dotToolStripMenuItem.Image")));
-            this.dotToolStripMenuItem.Name = "dotToolStripMenuItem";
-            this.dotToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
-            this.dotToolStripMenuItem.Text = "Dot";
-            // 
-            // dashDotToolStripMenuItem
-            // 
-            this.dashDotToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dashDotToolStripMenuItem.Image")));
-            this.dashDotToolStripMenuItem.Name = "dashDotToolStripMenuItem";
-            this.dashDotToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
-            this.dashDotToolStripMenuItem.Text = "DashDot";
-            // 
-            // dashDotDotToolStripMenuItem
-            // 
-            this.dashDotDotToolStripMenuItem.Image = global::MIDTERM_PROJECTS.Properties.Resources.dashed_line_240px;
-            this.dashDotDotToolStripMenuItem.Name = "dashDotDotToolStripMenuItem";
-            this.dashDotDotToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
-            this.dashDotDotToolStripMenuItem.Text = "DashDotDot";
+            this.btnClear.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
+            this.btnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(90, 35);
+            this.btnClear.Text = "Clear";
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click_1);
             // 
             // toolStrip2
             // 
@@ -292,7 +240,7 @@ namespace MIDTERM_PROJECTS
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1});
-            this.toolStrip2.Location = new System.Drawing.Point(759, 21);
+            this.toolStrip2.Location = new System.Drawing.Point(611, 21);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(122, 38);
             this.toolStrip2.TabIndex = 16;
@@ -308,30 +256,87 @@ namespace MIDTERM_PROJECTS
             this.toolStripButton1.Size = new System.Drawing.Size(119, 35);
             this.toolStripButton1.Text = "Remove";
             // 
-            // toolStrip3
+            // toolStrip1
             // 
-            this.toolStrip3.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnClear});
-            this.toolStrip3.Location = new System.Drawing.Point(759, 65);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(132, 38);
-            this.toolStrip3.TabIndex = 17;
-            this.toolStrip3.Text = "toolStrip3";
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnsplitStyle});
+            this.toolStrip1.Location = new System.Drawing.Point(763, 65);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(143, 38);
+            this.toolStrip1.TabIndex = 14;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // btnClear
+            // btnsplitStyle
             // 
-            this.btnClear.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
-            this.btnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(90, 35);
-            this.btnClear.Text = "Clear";
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click_1);
+            this.btnsplitStyle.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnsplitStyle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnsplitStyle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSolidType,
+            this.btnDashType,
+            this.btnDotType,
+            this.btnDashDotType,
+            this.btnDashDotDotType});
+            this.btnsplitStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnsplitStyle.Image = global::MIDTERM_PROJECTS.Properties.Resources.line_64px;
+            this.btnsplitStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnsplitStyle.Name = "btnsplitStyle";
+            this.btnsplitStyle.Size = new System.Drawing.Size(101, 35);
+            this.btnsplitStyle.Text = "Style";
+            // 
+            // btnSolidType
+            // 
+            this.btnSolidType.Image = global::MIDTERM_PROJECTS.Properties.Resources.line_64px;
+            this.btnSolidType.Name = "btnSolidType";
+            this.btnSolidType.Size = new System.Drawing.Size(227, 36);
+            this.btnSolidType.Text = "Solid";
+            this.btnSolidType.Click += new System.EventHandler(this.btnSolidType_Click);
+            // 
+            // btnDashType
+            // 
+            this.btnDashType.Image = global::MIDTERM_PROJECTS.Properties.Resources.dashed_line_64px;
+            this.btnDashType.Name = "btnDashType";
+            this.btnDashType.Size = new System.Drawing.Size(227, 36);
+            this.btnDashType.Text = "Dash";
+            this.btnDashType.Click += new System.EventHandler(this.btnDashType_Click);
+            // 
+            // btnDotType
+            // 
+            this.btnDotType.Image = global::MIDTERM_PROJECTS.Properties.Resources.dotted_barline;
+            this.btnDotType.Name = "btnDotType";
+            this.btnDotType.Size = new System.Drawing.Size(227, 36);
+            this.btnDotType.Text = "Dot";
+            this.btnDotType.Click += new System.EventHandler(this.btnDotType_Click);
+            // 
+            // btnDashDotType
+            // 
+            this.btnDashDotType.Image = global::MIDTERM_PROJECTS.Properties.Resources.dashed_line_240px1;
+            this.btnDashDotType.Name = "btnDashDotType";
+            this.btnDashDotType.Size = new System.Drawing.Size(227, 36);
+            this.btnDashDotType.Text = "DashDot";
+            this.btnDashDotType.Click += new System.EventHandler(this.btnDashDotType_Click);
+            // 
+            // btnDashDotDotType
+            // 
+            this.btnDashDotDotType.Image = global::MIDTERM_PROJECTS.Properties.Resources.dashed_line_240px;
+            this.btnDashDotDotType.Name = "btnDashDotDotType";
+            this.btnDashDotDotType.Size = new System.Drawing.Size(227, 36);
+            this.btnDashDotDotType.Text = "DashDotDot";
+            this.btnDashDotDotType.Click += new System.EventHandler(this.btnDashDotDotType_Click);
+            // 
+            // ptbColor
+            // 
+            this.ptbColor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ptbColor.BackgroundImage")));
+            this.ptbColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ptbColor.Location = new System.Drawing.Point(763, 21);
+            this.ptbColor.Name = "ptbColor";
+            this.ptbColor.Size = new System.Drawing.Size(86, 38);
+            this.ptbColor.TabIndex = 13;
+            this.ptbColor.TabStop = false;
+            this.ptbColor.Click += new System.EventHandler(this.ptbColor_Click);
             // 
             // Form1
             // 
@@ -342,15 +347,15 @@ namespace MIDTERM_PROJECTS
             this.Controls.Add(this.pnlMain);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.ptbColor)).EndInit();
             this.pnlControls.ResumeLayout(false);
             this.pnlControls.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbColor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -372,11 +377,11 @@ namespace MIDTERM_PROJECTS
         private Panel pnlControls;
         private ToolStrip toolStrip1;
         private ToolStripSplitButton btnsplitStyle;
-        private ToolStripMenuItem styleToolStripMenuItem;
-        private ToolStripMenuItem dashToolStripMenuItem;
-        private ToolStripMenuItem dotToolStripMenuItem;
-        private ToolStripMenuItem dashDotToolStripMenuItem;
-        private ToolStripMenuItem dashDotDotToolStripMenuItem;
+        private ToolStripMenuItem btnSolidType;
+        private ToolStripMenuItem btnDashType;
+        private ToolStripMenuItem btnDotType;
+        private ToolStripMenuItem btnDashDotType;
+        private ToolStripMenuItem btnDashDotDotType;
         private ToolStrip toolStrip2;
         private ToolStrip toolStrip3;
         private ToolStripButton btnClear;

@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Graphic.cs" />
     <Compile Include="Line.cs" />
+    <Compile Include="Polygon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RectangleGraphic.cs" />
@@ -91,6 +92,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dashed_line_240px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\colorpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dashed_line_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dotted-line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dotted-barline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dashed_line_240px1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
