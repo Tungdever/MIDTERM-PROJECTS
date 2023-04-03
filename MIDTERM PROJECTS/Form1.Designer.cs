@@ -32,12 +32,7 @@ namespace MIDTERM_PROJECTS
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlControls = new System.Windows.Forms.Panel();
-            this.cbbStyle = new System.Windows.Forms.ComboBox();
-            this.btnStyle = new System.Windows.Forms.Button();
-            this.BtnClear = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.btnColor = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnFilled_Polygon = new System.Windows.Forms.Button();
             this.btnpPolygon = new System.Windows.Forms.Button();
             this.btnArc = new System.Windows.Forms.Button();
@@ -50,92 +45,31 @@ namespace MIDTERM_PROJECTS
             this.btnLine = new System.Windows.Forms.Button();
             this.cldControls = new System.Windows.Forms.ColorDialog();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.ptbColor = new System.Windows.Forms.PictureBox();
+            this.pnlControls = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnsplitStyle = new System.Windows.Forms.ToolStripSplitButton();
+            this.styleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dashDotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dashDotDotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.btnClear = new System.Windows.Forms.ToolStripButton();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbColor)).BeginInit();
             this.pnlControls.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlControls
-            // 
-            this.pnlControls.Controls.Add(this.cbbStyle);
-            this.pnlControls.Controls.Add(this.btnStyle);
-            this.pnlControls.Controls.Add(this.BtnClear);
-            this.pnlControls.Controls.Add(this.btnRemove);
-            this.pnlControls.Controls.Add(this.btnColor);
-            this.pnlControls.Controls.Add(this.btnFilled_Polygon);
-            this.pnlControls.Controls.Add(this.btnpPolygon);
-            this.pnlControls.Controls.Add(this.btnArc);
-            this.pnlControls.Controls.Add(this.btnFilled_Circle);
-            this.pnlControls.Controls.Add(this.btnCircle);
-            this.pnlControls.Controls.Add(this.btnFilled_Rectangle);
-            this.pnlControls.Controls.Add(this.btnrectangle);
-            this.pnlControls.Controls.Add(this.btnFilled_Ellipse);
-            this.pnlControls.Controls.Add(this.btnEllipse);
-            this.pnlControls.Controls.Add(this.btnLine);
-            this.pnlControls.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlControls.Location = new System.Drawing.Point(0, 0);
-            this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(425, 708);
-            this.pnlControls.TabIndex = 0;
-            this.pnlControls.Click += new System.EventHandler(this.pnlControls_Click);
-            // 
-            // cbbStyle
-            // 
-            this.cbbStyle.Font = new System.Drawing.Font("Times New Roman", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbStyle.FormattingEnabled = true;
-            this.cbbStyle.Items.AddRange(new object[] {
-            System.Drawing.Drawing2D.DashStyle.Solid,
-            System.Drawing.Drawing2D.DashStyle.Dash,
-            System.Drawing.Drawing2D.DashStyle.Dot,
-            System.Drawing.Drawing2D.DashStyle.DashDot,
-            System.Drawing.Drawing2D.DashStyle.DashDotDot});
-            this.cbbStyle.Location = new System.Drawing.Point(219, 465);
-            this.cbbStyle.Name = "cbbStyle";
-            this.cbbStyle.Size = new System.Drawing.Size(186, 37);
-            this.cbbStyle.TabIndex = 0;
-            // 
-            // btnStyle
-            // 
-            this.btnStyle.Location = new System.Drawing.Point(219, 465);
-            this.btnStyle.Name = "btnStyle";
-            this.btnStyle.Size = new System.Drawing.Size(186, 38);
-            this.btnStyle.TabIndex = 13;
-            this.btnStyle.Text = "Style";
-            this.btnStyle.UseVisualStyleBackColor = true;
-            this.btnStyle.Click += new System.EventHandler(this.btnStyle_Click);
-            // 
-            // BtnClear
-            // 
-            this.BtnClear.Location = new System.Drawing.Point(219, 520);
-            this.BtnClear.Name = "BtnClear";
-            this.BtnClear.Size = new System.Drawing.Size(186, 38);
-            this.BtnClear.TabIndex = 11;
-            this.BtnClear.Text = "Clear";
-            this.BtnClear.UseVisualStyleBackColor = true;
-            this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Location = new System.Drawing.Point(12, 520);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(186, 38);
-            this.btnRemove.TabIndex = 10;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            // 
-            // btnColor
-            // 
-            this.btnColor.Location = new System.Drawing.Point(12, 465);
-            this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(186, 38);
-            this.btnColor.TabIndex = 12;
-            this.btnColor.Text = "Color";
-            this.btnColor.UseVisualStyleBackColor = true;
-            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnFilled_Polygon
             // 
-            this.btnFilled_Polygon.Location = new System.Drawing.Point(219, 405);
+            this.btnFilled_Polygon.Location = new System.Drawing.Point(237, 65);
             this.btnFilled_Polygon.Name = "btnFilled_Polygon";
-            this.btnFilled_Polygon.Size = new System.Drawing.Size(186, 38);
+            this.btnFilled_Polygon.Size = new System.Drawing.Size(113, 38);
             this.btnFilled_Polygon.TabIndex = 9;
             this.btnFilled_Polygon.Text = "Filled Polygon";
             this.btnFilled_Polygon.UseVisualStyleBackColor = true;
@@ -143,9 +77,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnpPolygon
             // 
-            this.btnpPolygon.Location = new System.Drawing.Point(219, 340);
+            this.btnpPolygon.Location = new System.Drawing.Point(123, 65);
             this.btnpPolygon.Name = "btnpPolygon";
-            this.btnpPolygon.Size = new System.Drawing.Size(186, 38);
+            this.btnpPolygon.Size = new System.Drawing.Size(108, 38);
             this.btnpPolygon.TabIndex = 8;
             this.btnpPolygon.Text = "Polygon";
             this.btnpPolygon.UseVisualStyleBackColor = true;
@@ -153,9 +87,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnArc
             // 
-            this.btnArc.Location = new System.Drawing.Point(219, 278);
+            this.btnArc.Location = new System.Drawing.Point(24, 65);
             this.btnArc.Name = "btnArc";
-            this.btnArc.Size = new System.Drawing.Size(186, 38);
+            this.btnArc.Size = new System.Drawing.Size(93, 38);
             this.btnArc.TabIndex = 7;
             this.btnArc.Text = "Arc";
             this.btnArc.UseVisualStyleBackColor = true;
@@ -163,9 +97,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnFilled_Circle
             // 
-            this.btnFilled_Circle.Location = new System.Drawing.Point(219, 212);
+            this.btnFilled_Circle.Location = new System.Drawing.Point(465, 65);
             this.btnFilled_Circle.Name = "btnFilled_Circle";
-            this.btnFilled_Circle.Size = new System.Drawing.Size(186, 38);
+            this.btnFilled_Circle.Size = new System.Drawing.Size(132, 38);
             this.btnFilled_Circle.TabIndex = 6;
             this.btnFilled_Circle.Text = "Filled Circle";
             this.btnFilled_Circle.UseVisualStyleBackColor = true;
@@ -173,9 +107,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnCircle
             // 
-            this.btnCircle.Location = new System.Drawing.Point(219, 147);
+            this.btnCircle.Location = new System.Drawing.Point(356, 65);
             this.btnCircle.Name = "btnCircle";
-            this.btnCircle.Size = new System.Drawing.Size(186, 38);
+            this.btnCircle.Size = new System.Drawing.Size(103, 38);
             this.btnCircle.TabIndex = 5;
             this.btnCircle.Text = "Circle";
             this.btnCircle.UseVisualStyleBackColor = true;
@@ -183,9 +117,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnFilled_Rectangle
             // 
-            this.btnFilled_Rectangle.Location = new System.Drawing.Point(12, 405);
+            this.btnFilled_Rectangle.Location = new System.Drawing.Point(465, 21);
             this.btnFilled_Rectangle.Name = "btnFilled_Rectangle";
-            this.btnFilled_Rectangle.Size = new System.Drawing.Size(186, 38);
+            this.btnFilled_Rectangle.Size = new System.Drawing.Size(132, 38);
             this.btnFilled_Rectangle.TabIndex = 4;
             this.btnFilled_Rectangle.Text = "Filled Rectangle";
             this.btnFilled_Rectangle.UseVisualStyleBackColor = true;
@@ -193,9 +127,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnrectangle
             // 
-            this.btnrectangle.Location = new System.Drawing.Point(12, 340);
+            this.btnrectangle.Location = new System.Drawing.Point(356, 21);
             this.btnrectangle.Name = "btnrectangle";
-            this.btnrectangle.Size = new System.Drawing.Size(186, 38);
+            this.btnrectangle.Size = new System.Drawing.Size(103, 38);
             this.btnrectangle.TabIndex = 3;
             this.btnrectangle.Text = "Rectangle";
             this.btnrectangle.UseVisualStyleBackColor = true;
@@ -203,9 +137,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnFilled_Ellipse
             // 
-            this.btnFilled_Ellipse.Location = new System.Drawing.Point(12, 278);
+            this.btnFilled_Ellipse.Location = new System.Drawing.Point(237, 21);
             this.btnFilled_Ellipse.Name = "btnFilled_Ellipse";
-            this.btnFilled_Ellipse.Size = new System.Drawing.Size(186, 38);
+            this.btnFilled_Ellipse.Size = new System.Drawing.Size(113, 38);
             this.btnFilled_Ellipse.TabIndex = 2;
             this.btnFilled_Ellipse.Text = "Filled Ellipse";
             this.btnFilled_Ellipse.UseVisualStyleBackColor = true;
@@ -213,9 +147,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnEllipse
             // 
-            this.btnEllipse.Location = new System.Drawing.Point(12, 212);
+            this.btnEllipse.Location = new System.Drawing.Point(123, 21);
             this.btnEllipse.Name = "btnEllipse";
-            this.btnEllipse.Size = new System.Drawing.Size(186, 38);
+            this.btnEllipse.Size = new System.Drawing.Size(108, 38);
             this.btnEllipse.TabIndex = 1;
             this.btnEllipse.Text = "Ellipse";
             this.btnEllipse.UseVisualStyleBackColor = true;
@@ -223,9 +157,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnLine
             // 
-            this.btnLine.Location = new System.Drawing.Point(12, 147);
+            this.btnLine.Location = new System.Drawing.Point(24, 21);
             this.btnLine.Name = "btnLine";
-            this.btnLine.Size = new System.Drawing.Size(186, 38);
+            this.btnLine.Size = new System.Drawing.Size(93, 38);
             this.btnLine.TabIndex = 0;
             this.btnLine.Text = "Line";
             this.btnLine.UseVisualStyleBackColor = true;
@@ -241,33 +175,187 @@ namespace MIDTERM_PROJECTS
             // 
             this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(425, 0);
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(873, 708);
+            this.pnlMain.Size = new System.Drawing.Size(1298, 708);
             this.pnlMain.TabIndex = 1;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
-            this.pnlMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseClick);
             this.pnlMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDown);
             this.pnlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseMove);
             this.pnlMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseUp);
+            // 
+            // ptbColor
+            // 
+            this.ptbColor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ptbColor.BackgroundImage")));
+            this.ptbColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ptbColor.Location = new System.Drawing.Point(617, 21);
+            this.ptbColor.Name = "ptbColor";
+            this.ptbColor.Size = new System.Drawing.Size(86, 38);
+            this.ptbColor.TabIndex = 13;
+            this.ptbColor.TabStop = false;
+            this.ptbColor.Click += new System.EventHandler(this.ptbColor_Click);
+            // 
+            // pnlControls
+            // 
+            this.pnlControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlControls.Controls.Add(this.toolStrip3);
+            this.pnlControls.Controls.Add(this.toolStrip2);
+            this.pnlControls.Controls.Add(this.toolStrip1);
+            this.pnlControls.Controls.Add(this.btnrectangle);
+            this.pnlControls.Controls.Add(this.btnFilled_Rectangle);
+            this.pnlControls.Controls.Add(this.btnArc);
+            this.pnlControls.Controls.Add(this.ptbColor);
+            this.pnlControls.Controls.Add(this.btnFilled_Ellipse);
+            this.pnlControls.Controls.Add(this.btnpPolygon);
+            this.pnlControls.Controls.Add(this.btnCircle);
+            this.pnlControls.Controls.Add(this.btnFilled_Polygon);
+            this.pnlControls.Controls.Add(this.btnLine);
+            this.pnlControls.Controls.Add(this.btnFilled_Circle);
+            this.pnlControls.Controls.Add(this.btnEllipse);
+            this.pnlControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlControls.Location = new System.Drawing.Point(0, 0);
+            this.pnlControls.Name = "pnlControls";
+            this.pnlControls.Size = new System.Drawing.Size(1298, 121);
+            this.pnlControls.TabIndex = 14;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnsplitStyle});
+            this.toolStrip1.Location = new System.Drawing.Point(617, 65);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(104, 38);
+            this.toolStrip1.TabIndex = 14;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnsplitStyle
+            // 
+            this.btnsplitStyle.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnsplitStyle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnsplitStyle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.styleToolStripMenuItem,
+            this.dashToolStripMenuItem,
+            this.dotToolStripMenuItem,
+            this.dashDotToolStripMenuItem,
+            this.dashDotDotToolStripMenuItem});
+            this.btnsplitStyle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnsplitStyle.Image = ((System.Drawing.Image)(resources.GetObject("btnsplitStyle.Image")));
+            this.btnsplitStyle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnsplitStyle.Name = "btnsplitStyle";
+            this.btnsplitStyle.Size = new System.Drawing.Size(101, 35);
+            this.btnsplitStyle.Text = "Style";
+            // 
+            // styleToolStripMenuItem
+            // 
+            this.styleToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("styleToolStripMenuItem.Image")));
+            this.styleToolStripMenuItem.Name = "styleToolStripMenuItem";
+            this.styleToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
+            this.styleToolStripMenuItem.Text = "Solid";
+            // 
+            // dashToolStripMenuItem
+            // 
+            this.dashToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dashToolStripMenuItem.Image")));
+            this.dashToolStripMenuItem.Name = "dashToolStripMenuItem";
+            this.dashToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
+            this.dashToolStripMenuItem.Text = "Dash";
+            // 
+            // dotToolStripMenuItem
+            // 
+            this.dotToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dotToolStripMenuItem.Image")));
+            this.dotToolStripMenuItem.Name = "dotToolStripMenuItem";
+            this.dotToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
+            this.dotToolStripMenuItem.Text = "Dot";
+            // 
+            // dashDotToolStripMenuItem
+            // 
+            this.dashDotToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dashDotToolStripMenuItem.Image")));
+            this.dashDotToolStripMenuItem.Name = "dashDotToolStripMenuItem";
+            this.dashDotToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
+            this.dashDotToolStripMenuItem.Text = "DashDot";
+            // 
+            // dashDotDotToolStripMenuItem
+            // 
+            this.dashDotDotToolStripMenuItem.Image = global::MIDTERM_PROJECTS.Properties.Resources.dashed_line_240px;
+            this.dashDotDotToolStripMenuItem.Name = "dashDotDotToolStripMenuItem";
+            this.dashDotDotToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
+            this.dashDotDotToolStripMenuItem.Text = "DashDotDot";
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip2.Location = new System.Drawing.Point(759, 21);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(122, 38);
+            this.toolStrip2.TabIndex = 16;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(119, 35);
+            this.toolStripButton1.Text = "Remove";
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnClear});
+            this.toolStrip3.Location = new System.Drawing.Point(759, 65);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(132, 38);
+            this.toolStrip3.TabIndex = 17;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
+            this.btnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(90, 35);
+            this.btnClear.Text = "Clear";
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1298, 708);
-            this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlControls);
+            this.Controls.Add(this.pnlMain);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.ptbColor)).EndInit();
             this.pnlControls.ResumeLayout(false);
+            this.pnlControls.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlControls;
         private System.Windows.Forms.Button btnEllipse;
         private System.Windows.Forms.Button btnLine;
         private System.Windows.Forms.Button btnFilled_Rectangle;
@@ -278,13 +366,21 @@ namespace MIDTERM_PROJECTS
         private System.Windows.Forms.Button btnArc;
         private System.Windows.Forms.Button btnFilled_Circle;
         private System.Windows.Forms.Button btnCircle;
-        private System.Windows.Forms.Button BtnClear;
-        private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ColorDialog cldControls;
-        private System.Windows.Forms.Button btnColor;
-        private System.Windows.Forms.ComboBox cbbStyle;
-        private System.Windows.Forms.Button btnStyle;
         private Panel pnlMain;
+        private PictureBox ptbColor;
+        private Panel pnlControls;
+        private ToolStrip toolStrip1;
+        private ToolStripSplitButton btnsplitStyle;
+        private ToolStripMenuItem styleToolStripMenuItem;
+        private ToolStripMenuItem dashToolStripMenuItem;
+        private ToolStripMenuItem dotToolStripMenuItem;
+        private ToolStripMenuItem dashDotToolStripMenuItem;
+        private ToolStripMenuItem dashDotDotToolStripMenuItem;
+        private ToolStrip toolStrip2;
+        private ToolStrip toolStrip3;
+        private ToolStripButton btnClear;
+        private ToolStripButton toolStripButton1;
     }
 }
 

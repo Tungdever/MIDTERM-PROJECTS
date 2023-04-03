@@ -49,9 +49,7 @@ namespace MIDTERM_PROJECTS
         public Form1()
         {
             InitializeComponent();
-            gp = this.pnlMain.CreateGraphics();
-            this.cbbStyle.SelectedIndex = 0;
-            this.cbbStyle.Hide();          
+            gp = this.pnlMain.CreateGraphics();                     
         }
 
         private void btnLine_Click(object sender, EventArgs e)
@@ -81,7 +79,7 @@ namespace MIDTERM_PROJECTS
             {
                 myColor = cldControls.Color;
                 myPen = new Pen(myColor, 5);
-                myPen.DashStyle = (DashStyle)this.cbbStyle.SelectedItem;
+                
 
                 if (this.isPolygon)
                 {
@@ -499,23 +497,7 @@ namespace MIDTERM_PROJECTS
             {
                 myColor = cldControls.Color; 
             }
-        }
-        private void btnStyle_Click(object sender, EventArgs e)
-        {
-            this.cbbStyle.Show();
-
-        }
-        private void pnlMain_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.cbbStyle.Hide(); 
-            
-        }
-
-        private void pnlControls_Click(object sender, EventArgs e)
-        {
-            this.cbbStyle.Hide();
-            
-        }
+        }       
         private void pnlMain_MouseMove(object sender, MouseEventArgs e)
         {
             if (isSelected)
@@ -580,6 +562,23 @@ namespace MIDTERM_PROJECTS
         {
             isSelected = false;
         }
+
+        private void ptbColor_Click(object sender, EventArgs e)
+        {
+            this.cldControls.ShowDialog();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClear_Click_1(object sender, EventArgs e)
+        {
+            this.graphics.Clear();
+            Refresh();
+        }
+
         private void pnlMain_Paint(object sender, PaintEventArgs e)
         {
             foreach (Graphic graphic in graphics)
