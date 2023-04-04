@@ -230,7 +230,7 @@ namespace MIDTERM_PROJECTS
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(90, 35);
             this.btnClear.Text = "Clear";
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click_1);
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // toolStrip2
             // 
@@ -242,7 +242,7 @@ namespace MIDTERM_PROJECTS
             this.toolStripButton1});
             this.toolStrip2.Location = new System.Drawing.Point(611, 21);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(122, 38);
+            this.toolStrip2.Size = new System.Drawing.Size(161, 38);
             this.toolStrip2.TabIndex = 16;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -255,6 +255,7 @@ namespace MIDTERM_PROJECTS
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(119, 35);
             this.toolStripButton1.Text = "Remove";
+            this.toolStripButton1.Click += new System.EventHandler(this.btnRemove);
             // 
             // toolStrip1
             // 
@@ -266,7 +267,7 @@ namespace MIDTERM_PROJECTS
             this.btnsplitStyle});
             this.toolStrip1.Location = new System.Drawing.Point(763, 65);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(143, 38);
+            this.toolStrip1.Size = new System.Drawing.Size(104, 38);
             this.toolStrip1.TabIndex = 14;
             this.toolStrip1.Text = "toolStrip1";
             // 

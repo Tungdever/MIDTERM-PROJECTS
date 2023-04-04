@@ -20,7 +20,6 @@ namespace MIDTERM_PROJECTS
         Color myColor;
         bool isLine = false;
         bool isEllipse = false;
-        Point beginPoint = new Point();
         bool isPress = false;
         bool isClickColtrols = false;
         bool isFillElipse = false;
@@ -38,10 +37,22 @@ namespace MIDTERM_PROJECTS
         bool isDot = false;
         bool isDashDot = false;
         bool isDashDotDot = false;
+        bool isStartPress = false;
+        bool isEndPress = false;
+        bool isTopLeft = false;
+        bool isTopRight = false;
+        bool isRight = false;
+        bool isBotRight = false;
+        bool isBotLeft = false;
+        bool isLeft = false;
+        bool isTop = false;
+        bool isBottom = false;
         List<Point> lSides;
         List<Graphic> graphics = new List<Graphic>();
+        List<Graphic> selected = new List<Graphic>();
         int ItemSelected;
         int posSelected = -1;
+
         int x, y;        
         public static void Swap(ref int a, ref int b)
         {
@@ -198,19 +209,39 @@ namespace MIDTERM_PROJECTS
                         {
                             ItemSelected = i;
                             isSelected = true;
-                            posSelected = 0;
+                            isStartPress = true;
+                            isEndPress = false;
                             x = e.X; y = e.Y;
+                            if (selected.Count() > 0 && ModifierKeys == Keys.Control && e.Button == MouseButtons.Left)
+                            {
+                                selected.Add(line);
+                            }
+                            else
+                            {
+                                selected.Clear();
+                                selected.Add(line);
+                            }
                             break;
                         }
                         else if (e.X >= line.p2.X - 10 && e.X <= line.p2.X + 10 && e.Y >= line.p2.Y - 10 && e.Y <= line.p2.Y + 10)
                         {
                             ItemSelected = i;
                             isSelected = true;
-                            posSelected = 1;
+                            isEndPress = true;
+                            isStartPress = false;
                             x = e.X; y = e.Y;
+                            if (selected.Count() > 0 && ModifierKeys == Keys.Control && e.Button == MouseButtons.Left)
+                            {
+                                selected.Add(line);
+                            }
+                            else
+                            {
+                                selected.Clear();
+                                selected.Add(line);
+                            }
                             break;
                         }
-                        else 
+                        else
                         {
                             int x1 = line.p1.X;
                             int x2 = line.p2.X;
@@ -224,10 +255,22 @@ namespace MIDTERM_PROJECTS
                                     ItemSelected = i;
                                     isSelected = true;
                                     x = e.X; y = e.Y;
+                                    if (selected.Count() > 0 && ModifierKeys == Keys.Control && e.Button == MouseButtons.Left)
+                                    {
+                                        selected.Add(line);
+                                    }
+                                    else
+                                    {
+                                        selected.Clear();
+                                        selected.Add(line);
+                                    }
                                     break;
-                                }
+                                } 
+                            
                         }
-                                     
+
+                        
+
                     }
                     else if (graphics[i] is Elipse elipse)
                     {
@@ -546,8 +589,15 @@ namespace MIDTERM_PROJECTS
                 int deltaY = e.Y - y;
                 if (graphics[ItemSelected] is Line lineObject)
                 {
-
-                    lineObject.Move(deltaX, deltaY);
+                    if (isStartPress)
+                    {
+                        lineObject.p1 = e.Location;
+                    }
+                    else if (isEndPress)
+                    {
+                        lineObject.p2 = e.Location;
+                    }
+                    else lineObject.Move(deltaX, deltaY);
                 }          
                 else if (graphics[ItemSelected] is Elipse elipseObject)
                 {
@@ -596,6 +646,8 @@ namespace MIDTERM_PROJECTS
             if (isPress)
             {
                 this.graphics[this.graphics.Count - 1].p2 = e.Location;
+                selected.Clear();
+                selected.Add(this.graphics[this.graphics.Count - 1]);
                 this.pnlMain.Refresh();
                 isClickColtrols = false;
                 isPress = false;
@@ -610,8 +662,14 @@ namespace MIDTERM_PROJECTS
                 isPolygon = false;
                 isRectangle = false;
             }           
-            
-            
+            if (isStartPress)
+            {
+                isStartPress = false;
+            }
+            if (isEndPress)
+            {
+                isEndPress = false;
+            }
         }
 
         private void ptbColor_Click(object sender, EventArgs e)
@@ -624,11 +682,7 @@ namespace MIDTERM_PROJECTS
 
         }
 
-        private void btnClear_Click_1(object sender, EventArgs e)
-        {
-            this.graphics.Clear();
-            this.pnlMain.Refresh();
-        }
+        
 
         
 
@@ -665,6 +719,22 @@ namespace MIDTERM_PROJECTS
             isDash = false; isSolid = true; isDot = false; isDashDot = false; isDashDotDot = false;
             btnsplitStyle.Text = btnSolidType.Text;
             btnsplitStyle.Image = global::MIDTERM_PROJECTS.Properties.Resources.line_64px;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            this.graphics.Clear();
+            this.pnlMain.Refresh();
+        }
+
+        private void btnRemove(object sender, EventArgs e)
+        {
+            foreach(Graphic gp in selected)
+            {
+                graphics.Remove(gp);
+            }          
+            this.pnlMain.Refresh();
+            
         }
 
         private void pnlMain_Paint(object sender, PaintEventArgs e)

@@ -21,7 +21,10 @@ namespace MIDTERM_PROJECTS
  
         public override void Draw(Graphics gp)
         {
-            gp.DrawLine(myPen, p1, p2);   
+            gp.DrawLine(myPen, p1, p2);
+            Brush myBrush = new SolidBrush(Color.Blue);
+            gp.FillEllipse(myBrush, p1.X-2, p1.Y - 4, 10, 10);
+            gp.FillEllipse(myBrush, p2.X-2, p2.Y - 4, 10, 10);
         }
 
         public override void Move(int deltaX, int deltaY)
