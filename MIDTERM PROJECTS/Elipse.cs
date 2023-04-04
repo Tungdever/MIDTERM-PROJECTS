@@ -15,7 +15,7 @@ namespace MIDTERM_PROJECTS
         {          
             this.myPen = myPen;
         }
-        public override void Draw(Graphics gp)
+        public override void Draw(Graphics gp, bool isSelected)
         {
             RectangleF myRectangleF = new RectangleF(p1, new Size(p2.X - p1.X, p2.Y - p1.Y));
             gp.DrawEllipse(this.myPen, myRectangleF);

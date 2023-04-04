@@ -255,7 +255,7 @@ namespace MIDTERM_PROJECTS
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(119, 35);
             this.toolStripButton1.Text = "Remove";
-            this.toolStripButton1.Click += new System.EventHandler(this.btnRemove);
+            this.toolStripButton1.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // toolStrip1
             // 

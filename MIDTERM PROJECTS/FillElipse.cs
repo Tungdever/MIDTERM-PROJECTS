@@ -14,7 +14,7 @@ namespace MIDTERM_PROJECTS
         {
             this.myBrush = myBrush;
         }
-        public override void Draw(Graphics gp)
+        public override void Draw(Graphics gp, bool isSelected)
         {
             RectangleF myRectangleF = new RectangleF(p1, new Size(p2.X - p1.X, p2.Y - p1.Y));
             gp.FillEllipse(myBrush, myRectangleF);

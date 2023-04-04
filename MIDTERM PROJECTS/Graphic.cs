@@ -11,7 +11,7 @@ namespace MIDTERM_PROJECTS
     {
         public Point p1;
         public Point p2;
-        public abstract void Draw(Graphics gp);
+        public abstract void Draw(Graphics gp, bool isSelected);
         public abstract void Move(int deltaX, int deltaY);
     }
 }

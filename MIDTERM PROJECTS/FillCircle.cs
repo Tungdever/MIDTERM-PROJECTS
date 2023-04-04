@@ -15,10 +15,12 @@ namespace MIDTERM_PROJECTS
         {
             this.myBrush = myBrush;
         }
-        public override void Draw(Graphics gp)
+        public override void Draw(Graphics gp, bool isSelected)
         {
-            double rad = Form1.DistanceTo(p1, p2);
-            gp.FillEllipse(myBrush, p1.X, p1.Y, (int)rad, (int)rad);
+            int centerX = (p1.X + p2.X) / 2;
+            int centerY = (p1.Y + p2.Y) / 2;
+            int radius = (int)Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2)) / 2;
+            gp.FillEllipse(myBrush, centerX - radius, centerY - radius, radius * 2, radius * 2);
         }
 
         public override void Move(int deltaX, int deltaY)

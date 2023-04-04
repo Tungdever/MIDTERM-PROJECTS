@@ -24,7 +24,7 @@ namespace MIDTERM_PROJECTS
                 lPoint[i] = p;
             }
         }
-        public override void Draw(Graphics gp)
+        public override void Draw(Graphics gp, bool isSelected)
         {
             Point[] arrPoint = lPoint.ToArray();
             gp.FillPolygon(myBrush, arrPoint);

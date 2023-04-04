@@ -19,12 +19,16 @@ namespace MIDTERM_PROJECTS
             
         }
  
-        public override void Draw(Graphics gp)
+        public override void Draw(Graphics gp, bool isSelected)
         {
             gp.DrawLine(myPen, p1, p2);
             Brush myBrush = new SolidBrush(Color.Blue);
-            gp.FillEllipse(myBrush, p1.X-2, p1.Y - 4, 10, 10);
-            gp.FillEllipse(myBrush, p2.X-2, p2.Y - 4, 10, 10);
+            if (isSelected)
+            {
+                gp.FillEllipse(myBrush, p1.X - 2, p1.Y - 7, 15, 15);
+                gp.FillEllipse(myBrush, p2.X - 2, p2.Y - 7, 15, 15);
+            }
+            
         }
 
         public override void Move(int deltaX, int deltaY)

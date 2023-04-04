@@ -14,10 +14,27 @@ namespace MIDTERM_PROJECTS
         {
             this.myPen = myPen;
         }
-        public override void Draw(Graphics gp)
+        public override void Draw(Graphics gp, bool isSelected)
         {
-            Rectangle myRectangle = new Rectangle(p1, new Size(p2.X - p1.X, p2.Y - p1.Y));
-            gp.DrawRectangle(myPen, myRectangle);
+            Rectangle myRectangle;
+            if (p2.Y >= p1.Y) 
+            {
+                if (p2.X> p1.X) myRectangle = new Rectangle(p1.X, p1.Y, p2.X - p1.X, p2.Y - p1.Y);
+                else
+                {
+                    myRectangle = new Rectangle(p2.X, p1.Y, p1.X - p2.X, p2.Y - p1.Y);
+                }
+                gp.DrawRectangle(myPen, myRectangle);
+            }
+            else if (p2.Y< p1.Y) 
+            {
+                if (p2.X > p1.X) myRectangle = myRectangle = new Rectangle(p1.X, p2.Y, p2.X - p1.X, p1.Y - p2.Y);
+                else
+                {
+                    myRectangle = new Rectangle(p2.X,p2.Y, p1.X - p2.X , p1.Y - p2.Y);
+                }
+                gp.DrawRectangle(myPen, myRectangle);
+            }
         }
 
         public override void Move(int deltaX, int deltaY)
