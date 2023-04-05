@@ -51,21 +51,21 @@ namespace MIDTERM_PROJECTS
                 }
                 
                 Point[] resizePoints = new Point[8];
-                resizePoints[0] = new Point(myRectangle.X, myRectangle.Y);
+                resizePoints[0] = new Point(myRectangle.X, myRectangle.Y);  // Top-left
                 rectangles[0] = new RectangleF(resizePoints[0].X - 5, resizePoints[0].Y - 5, 10, 10);
-                resizePoints[1] = new Point(myRectangle.X + myRectangle.Width / 2, myRectangle.Y);
-                rectangles[1] = new RectangleF(resizePoints[1].X , resizePoints[1].Y -5, 10, 10);
-                resizePoints[2] = new Point(myRectangle.Right, myRectangle.Y);
-                rectangles[2] = new RectangleF(resizePoints[2].X- 5, resizePoints[2].Y - 5, 10, 10);          
-                resizePoints[3] = new Point(myRectangle.Right, myRectangle.Y + myRectangle.Height / 2);
-                rectangles[3] = new RectangleF(resizePoints[3].X - 5, resizePoints[3].Y , 10, 10);
-                resizePoints[4] = new Point(myRectangle.Right, myRectangle.Bottom);
+                resizePoints[1] = new Point(myRectangle.X + myRectangle.Width / 2, myRectangle.Y);  // Top-center
+                rectangles[1] = new RectangleF(resizePoints[1].X - 5, resizePoints[1].Y - 5, 10, 10);
+                resizePoints[2] = new Point(myRectangle.Right, myRectangle.Y);  // Top-right
+                rectangles[2] = new RectangleF(resizePoints[2].X - 5, resizePoints[2].Y - 5, 10, 10);          
+                resizePoints[3] = new Point(myRectangle.Right, myRectangle.Y + myRectangle.Height / 2); // Middle-right
+                rectangles[3] = new RectangleF(resizePoints[3].X - 5, resizePoints[3].Y - 5 , 10, 10);
+                resizePoints[4] = new Point(myRectangle.Right, myRectangle.Bottom); // Bottom-right
                 rectangles[4] = new RectangleF(resizePoints[4].X - 5, resizePoints[4].Y - 5, 10, 10);
-                resizePoints[5] = new Point(myRectangle.X + myRectangle.Width / 2, myRectangle.Bottom);
-                rectangles[5] = new RectangleF(resizePoints[5].X , resizePoints[5].Y -5, 10, 10);
-                resizePoints[6] = new Point(myRectangle.X, myRectangle.Bottom);
+                resizePoints[5] = new Point(myRectangle.X + myRectangle.Width / 2, myRectangle.Bottom);   // Bottom-center
+                rectangles[5] = new RectangleF(resizePoints[5].X - 5, resizePoints[5].Y - 5, 10, 10);
+                resizePoints[6] = new Point(myRectangle.X, myRectangle.Bottom);     // Bottom-left
                 rectangles[6] = new RectangleF(resizePoints[6].X - 5, resizePoints[6].Y - 5, 10, 10);
-                resizePoints[7] = new Point(myRectangle.X, myRectangle.Y + myRectangle.Height / 2);
+                resizePoints[7] = new Point(myRectangle.X, myRectangle.Y + myRectangle.Height / 2); // Middle-left
                 rectangles[7] = new RectangleF(resizePoints[7].X - 5, resizePoints[7].Y - 5, 10, 10);
                 gp.FillRectangles(myBrush, rectangles);
 

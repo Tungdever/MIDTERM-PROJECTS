@@ -252,7 +252,7 @@ namespace MIDTERM_PROJECTS
             if (isClickColtrols)
             {
                 myColor = cldControls.Color;
-                Pen myPen = new Pen(myColor, 5);
+                Pen myPen = new Pen(myColor, 3);
                 if (isSolid) myPen.DashStyle = DashStyle.Solid;
                 else if (isDash) myPen.DashStyle = DashStyle.Dash;
                 else if (isDot) myPen.DashStyle = DashStyle.Dot;
@@ -302,8 +302,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (this.isFillElipse)
                     {
-                        Brush myBrush = new SolidBrush(myColor);
-                        Graphic newFillElipse = new FillElipse(myBrush);
+                        Graphic newFillElipse = new FillElipse(myColor);
                         newFillElipse.p1 = e.Location;
                         graphics.Add(newFillElipse);
 

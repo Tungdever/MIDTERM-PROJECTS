@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace MIDTERM_PROJECTS
 {
@@ -14,7 +9,7 @@ namespace MIDTERM_PROJECTS
         public FillRectangle(Color myColor)
         {
             this.myColor = myColor;
-            
+
         }
         public override void Draw(Graphics gp, bool isSelected)
         {
@@ -39,24 +34,32 @@ namespace MIDTERM_PROJECTS
             }
             if (isSelected)
             {
-                myBrush = new SolidBrush(Color.FromArgb(255 - myColor.R, 255 - myColor.G, 255 - myColor.B));
-                RectangleF[] rectangles = new RectangleF[8];                
+
+                if (myColor.Equals(Color.Black) || myColor.Equals(Color.White))
+                {
+                    myBrush = new SolidBrush(Color.Blue);
+                }
+                else
+                {
+                    myBrush = new SolidBrush(Color.FromArgb(255 - myColor.R, 255 - myColor.G, 255 - myColor.B));
+                }
+                RectangleF[] rectangles = new RectangleF[8];
                 Point[] resizePoints = new Point[8];
-                resizePoints[0] = new Point((int)myRectangleF.X, (int)myRectangleF.Y);
+                resizePoints[0] = new Point((int)myRectangleF.X, (int)myRectangleF.Y); // Top-left
                 rectangles[0] = new RectangleF(resizePoints[0].X - 5, resizePoints[0].Y - 5, 10, 10);
-                resizePoints[1] = new Point((int)myRectangleF.X + (int)myRectangleF.Width / 2, (int)myRectangleF.Y);
-                rectangles[1] = new RectangleF(resizePoints[1].X, resizePoints[1].Y - 5, 10, 10);
-                resizePoints[2] = new Point((int)myRectangleF.Right, (int)myRectangleF.Y);
+                resizePoints[1] = new Point((int)myRectangleF.X + (int)myRectangleF.Width / 2, (int)myRectangleF.Y);// Top-center
+                rectangles[1] = new RectangleF(resizePoints[1].X - 5, resizePoints[1].Y - 5, 10, 10);
+                resizePoints[2] = new Point((int)myRectangleF.Right, (int)myRectangleF.Y);// Top-right
                 rectangles[2] = new RectangleF(resizePoints[2].X - 5, resizePoints[2].Y - 5, 10, 10);
-                resizePoints[3] = new Point((int)myRectangleF.Right, (int)myRectangleF.Y + (int)myRectangleF.Height / 2);
-                rectangles[3] = new RectangleF(resizePoints[3].X - 5, resizePoints[3].Y, 10, 10);
-                resizePoints[4] = new Point((int)myRectangleF.Right, (int)myRectangleF.Bottom);
+                resizePoints[3] = new Point((int)myRectangleF.Right, (int)myRectangleF.Y + (int)myRectangleF.Height / 2);// Middle-right
+                rectangles[3] = new RectangleF(resizePoints[3].X - 5, resizePoints[3].Y - 5, 10, 10);
+                resizePoints[4] = new Point((int)myRectangleF.Right, (int)myRectangleF.Bottom);// Bottom-right
                 rectangles[4] = new RectangleF(resizePoints[4].X - 5, resizePoints[4].Y - 5, 10, 10);
-                resizePoints[5] = new Point((int)myRectangleF.X + (int)myRectangleF.Width / 2, (int)myRectangleF.Bottom);
-                rectangles[5] = new RectangleF(resizePoints[5].X, resizePoints[5].Y - 5, 10, 10);
-                resizePoints[6] = new Point((int)myRectangleF.X, (int)myRectangleF.Bottom);
+                resizePoints[5] = new Point((int)myRectangleF.X + (int)myRectangleF.Width / 2, (int)myRectangleF.Bottom);// Bottom-center
+                rectangles[5] = new RectangleF(resizePoints[5].X - 5, resizePoints[5].Y - 5, 10, 10);
+                resizePoints[6] = new Point((int)myRectangleF.X, (int)myRectangleF.Bottom);// Bottom-left
                 rectangles[6] = new RectangleF(resizePoints[6].X - 5, resizePoints[6].Y - 5, 10, 10);
-                resizePoints[7] = new Point((int)myRectangleF.X, (int)myRectangleF.Y + (int)myRectangleF.Height / 2);
+                resizePoints[7] = new Point((int)myRectangleF.X, (int)myRectangleF.Y + (int)myRectangleF.Height / 2);// Middle-left
                 rectangles[7] = new RectangleF(resizePoints[7].X - 5, resizePoints[7].Y - 5, 10, 10);
                 gp.FillRectangles(myBrush, rectangles);
             }

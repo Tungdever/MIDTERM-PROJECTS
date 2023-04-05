@@ -16,14 +16,13 @@ namespace MIDTERM_PROJECTS
         }
         public override void Draw(Graphics gp, bool isSelected)
         {
-            int centerX = (p1.X + p2.X) / 2;
-            int centerY = (p1.Y + p2.Y) / 2;
-            int radius = (int)Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2)) / 2;
-            double startAngle = Math.Atan2(p1.Y - centerY, p1.X - centerX) * 180 / Math.PI;
-            double endAngle = Math.Atan2(p2.Y - centerY, p2.X - centerX) * 180 / Math.PI;
+            int centerX = p1.X;
+            int centerY = p1.Y;
+            int radius = (int)Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2));
+            int startAngle = (int)(Math.Atan2(p2.Y - p1.Y, p2.X - p1.X) * 180 / Math.PI);       
             try
             {
-                gp.DrawArc(myPen, centerX - radius, centerY - radius, radius * 2, radius * 2, (float)startAngle, (float)(endAngle - startAngle));
+                gp.DrawArc(myPen, centerX - radius, centerY - radius, radius * 2, radius * 2, startAngle, 90);
             }
             catch 
             { 
