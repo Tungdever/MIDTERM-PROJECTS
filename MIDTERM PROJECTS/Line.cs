@@ -25,8 +25,8 @@ namespace MIDTERM_PROJECTS
             Brush myBrush = new SolidBrush(Color.Blue);
             if (isSelected)
             {
-                gp.FillEllipse(myBrush, p1.X - 2, p1.Y - 7, 15, 15);
-                gp.FillEllipse(myBrush, p2.X - 2, p2.Y - 7, 15, 15);
+                gp.FillEllipse(myBrush, p1.X - 2, p1.Y - 7, 13, 13);
+                gp.FillEllipse(myBrush, p2.X - 2, p2.Y - 7, 13, 13);
             }
             
         }
