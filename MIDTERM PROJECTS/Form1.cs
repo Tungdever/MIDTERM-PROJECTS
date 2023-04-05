@@ -317,8 +317,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (this.isFillRectangle)
                     {
-                        Brush myBrush = new SolidBrush(myColor);
-                        Graphic newFillRectangle = new FillRectangle(myBrush);
+                        Graphic newFillRectangle = new FillRectangle(myColor);
                         newFillRectangle.p1 = e.Location;
                         graphics.Add(newFillRectangle);
                     }
@@ -331,8 +330,8 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (this.isFillCircle)
                     {
-                        Brush myBrush = new SolidBrush(myColor);
-                        Graphic newFillCircle = new FillCircle(myBrush);
+
+                        Graphic newFillCircle = new FillCircle(myColor);
                         newFillCircle.p1 = e.Location;
                         graphics.Add(newFillCircle);
 

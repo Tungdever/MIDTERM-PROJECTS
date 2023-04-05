@@ -37,26 +37,36 @@ namespace MIDTERM_PROJECTS
                 gp.DrawRectangle(myPen, myRectangle);
             }
             if (isSelected)
-            {
-                Rectangle[] rectangles = new Rectangle[8];
-                Brush myBrush = new SolidBrush(Color.FromArgb(255 - myPen.Color.R, 255 - myPen.Color.G, 255 - myPen.Color.B));
+            { 
+
+                Brush myBrush;
+                RectangleF[] rectangles = new RectangleF[8];
+                if (myPen.Color.Equals(Color.Black) || myPen.Color.Equals(Color.White))
+                {
+                    myBrush = new SolidBrush(Color.Blue);
+                }                
+                else
+                {
+                    myBrush = new SolidBrush(Color.FromArgb(255 - myPen.Color.R, 255 - myPen.Color.G, 255 - myPen.Color.B));
+                }
+                
                 Point[] resizePoints = new Point[8];
                 resizePoints[0] = new Point(myRectangle.X, myRectangle.Y);
-                rectangles[0] = new Rectangle(resizePoints[0].X - 2, resizePoints[0].Y - 2, 5, 5);
+                rectangles[0] = new RectangleF(resizePoints[0].X - 5, resizePoints[0].Y - 5, 10, 10);
                 resizePoints[1] = new Point(myRectangle.X + myRectangle.Width / 2, myRectangle.Y);
-                rectangles[1] = new Rectangle(resizePoints[1].X , resizePoints[1].Y -2, 5, 5);
+                rectangles[1] = new RectangleF(resizePoints[1].X , resizePoints[1].Y -5, 10, 10);
                 resizePoints[2] = new Point(myRectangle.Right, myRectangle.Y);
-                rectangles[2] = new Rectangle(resizePoints[2].X-2, resizePoints[2].Y - 2, 5, 5);          
+                rectangles[2] = new RectangleF(resizePoints[2].X- 5, resizePoints[2].Y - 5, 10, 10);          
                 resizePoints[3] = new Point(myRectangle.Right, myRectangle.Y + myRectangle.Height / 2);
-                rectangles[3] = new Rectangle(resizePoints[3].X -2, resizePoints[3].Y , 5, 5);
+                rectangles[3] = new RectangleF(resizePoints[3].X - 5, resizePoints[3].Y , 10, 10);
                 resizePoints[4] = new Point(myRectangle.Right, myRectangle.Bottom);
-                rectangles[4] = new Rectangle(resizePoints[4].X - 2, resizePoints[4].Y - 2, 5, 5);
+                rectangles[4] = new RectangleF(resizePoints[4].X - 5, resizePoints[4].Y - 5, 10, 10);
                 resizePoints[5] = new Point(myRectangle.X + myRectangle.Width / 2, myRectangle.Bottom);
-                rectangles[5] = new Rectangle(resizePoints[5].X , resizePoints[5].Y -2, 5, 5);
+                rectangles[5] = new RectangleF(resizePoints[5].X , resizePoints[5].Y -5, 10, 10);
                 resizePoints[6] = new Point(myRectangle.X, myRectangle.Bottom);
-                rectangles[6] = new Rectangle(resizePoints[6].X - 2, resizePoints[6].Y - 2, 5, 5);
+                rectangles[6] = new RectangleF(resizePoints[6].X - 5, resizePoints[6].Y - 5, 10, 10);
                 resizePoints[7] = new Point(myRectangle.X, myRectangle.Y + myRectangle.Height / 2);
-                rectangles[7] = new Rectangle(resizePoints[7].X - 2, resizePoints[7].Y - 2, 5, 5);
+                rectangles[7] = new RectangleF(resizePoints[7].X - 5, resizePoints[7].Y - 5, 10, 10);
                 gp.FillRectangles(myBrush, rectangles);
 
             }
