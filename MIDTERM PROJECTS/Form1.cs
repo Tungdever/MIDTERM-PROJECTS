@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -264,9 +265,11 @@ namespace MIDTERM_PROJECTS
                     lSides.Add(newPoint);
                     if (this.lSides.Count == numSides)
                     {
-                        Polygon newPolygon = new Polygon(lSides, myPen);
+                        Graphic newPolygon = new Polygon(lSides, myPen);
                         graphics.Add(newPolygon);
                         graphics[graphics.Count - 1].Draw(gp, false);
+                        selected.Clear();
+                        selected.Add(this.graphics[this.graphics.Count - 1]);
                         this.isPolygon = false;
                         this.isClickColtrols = false;
                     }
@@ -277,10 +280,11 @@ namespace MIDTERM_PROJECTS
                     lSides.Add(newPoint);
                     if (this.lSides.Count == numSides)
                     {
-                        Brush myBrush = new SolidBrush(myColor);
-                        FillPolygon newFillPolygon = new FillPolygon(lSides, myBrush);
+                        FillPolygon newFillPolygon = new FillPolygon(lSides, myColor);
                         graphics.Add(newFillPolygon);
                         graphics[graphics.Count - 1].Draw(gp, false);
+                        selected.Clear();
+                        selected.Add(this.graphics[this.graphics.Count - 1]);
                         this.isFillPolygon = false;
                         this.isClickColtrols = false;
                     }
@@ -565,12 +569,27 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is Polygon polygon)
                     {
-                        int x1 = polygon.p1.X;
-                        int x2 = polygon.p2.X;
-                        int y1 = polygon.p1.Y;
-                        int y2 = polygon.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        int minX = int.MaxValue, maxX = int.MinValue, minY = int.MaxValue, maxY = int.MinValue;
+                        foreach (Point point in polygon.lPoint)
+                        {
+                            if (point.X < minX)
+                            {
+                                minX = point.X;
+                            }
+                            if (point.X > maxX)
+                            {
+                                maxX = point.X;
+                            }
+                            if (point.Y < minY)
+                            {
+                                minY = point.Y;
+                            }
+                            if (point.Y > maxY)
+                            {
+                                maxY = point.Y;
+                            }
+                        }
+                        if (e.X >= minX && e.X <= maxX && e.Y >= minY && e.Y <= maxY)
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
@@ -592,12 +611,27 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is FillPolygon fill_polygon)
                     {
-                        int x1 = fill_polygon.p1.X;
-                        int x2 = fill_polygon.p2.X;
-                        int y1 = fill_polygon.p1.Y;
-                        int y2 = fill_polygon.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        int minX = int.MaxValue, maxX = int.MinValue, minY = int.MaxValue, maxY = int.MinValue;
+                        foreach (Point point in fill_polygon.lPoint)
+                        {
+                            if (point.X < minX)
+                            {
+                                minX = point.X;
+                            }
+                            if (point.X > maxX)
+                            {
+                                maxX = point.X;
+                            }
+                            if (point.Y < minY)
+                            {
+                                minY = point.Y;
+                            }
+                            if (point.Y > maxY)
+                            {
+                                maxY = point.Y;
+                            }
+                        }
+                        if (e.X >= minX && e.X <= maxX && e.Y >= minY && e.Y <= maxY)
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
