@@ -92,5 +92,15 @@ namespace MIDTERM_PROJECTS
 
             }
         }
+
+        public override void Zoom(int pos, int deltaX, int deltaY)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int getPosZoom(int mouseDownX, int mouseDownY)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

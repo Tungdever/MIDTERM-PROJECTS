@@ -8,10 +8,12 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Microsoft.VisualBasic;
+using Microsoft.VisualBasic.Devices;
 using static System.Windows.Forms.LinkLabel;
 
 namespace MIDTERM_PROJECTS
@@ -39,21 +41,11 @@ namespace MIDTERM_PROJECTS
         bool isDot = false;
         bool isDashDot = false;
         bool isDashDotDot = false;
-        bool isStartPress = false;
-        bool isEndPress = false;
-        bool isTopLeft = false;
-        bool isTopRight = false;
-        bool isRight = false;
-        bool isBotRight = false;
-        bool isBotLeft = false;
-        bool isLeft = false;
-        bool isTop = false;
-        bool isBottom = false;
         List<Point> lSides;
         List<Graphic> graphics = new List<Graphic>();
         List<Graphic> selected = new List<Graphic>();
-
-        int x, y;        
+        int x, y;
+        int posZoom;
         public static void Swap(ref int a, ref int b)
         {
             int temp = a;
@@ -353,19 +345,24 @@ namespace MIDTERM_PROJECTS
                 {
                     if (graphics[i] is Line line)
                     {
-                        int x1 = line.p1.X;
-                        int x2 = line.p2.X;
-                        int y1 = line.p1.Y;
-                        int y2 = line.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        int mouseX = e.X;
+                        int mouseY = e.Y;
+
+                        // Tính toán hệ số góc và hệ số y tại điểm click để kiểm tra xem nó có nằm trên đường thẳng không
+                        float slope = (line.p2.Y - line.p1.Y) / (float)(line.p2.X - line.p1.X);
+                        float yIntercept = line.p1.Y - slope * line.p1.X;
+                        float expectedY = slope * mouseX + yIntercept;
+
+                        // Kiểm tra xem vị trí click của chuột có nằm trên đường thẳng không
+                        posZoom = line.getPosZoom(e.X, e.Y);
+                        if (Math.Abs(mouseY - expectedY) < 5)
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
                             if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
-                            }                              
+                            }
                             else
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
@@ -377,15 +374,19 @@ namespace MIDTERM_PROJECTS
                             }
                             return;
                         }
+                        
                     }
                     else if (graphics[i] is Elipse elipse)
                     {
-                        int x1 = elipse.p1.X;
-                        int x2 = elipse.p2.X;
-                        int y1 = elipse.p1.Y;
-                        int y2 = elipse.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        double distance = Math.Sqrt(Math.Pow(e.X - elipse.center.X, 2) / Math.Pow(elipse.a, 2) + Math.Pow(e.Y - elipse.center.Y, 2) / Math.Pow(elipse.b, 2));
+                        posZoom = elipse.getPosZoom(e.X, e.Y);
+                        if (posZoom != -1 && selected.Contains(elipse))
+                        {
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            return;
+                        }
+                        else if (distance <= 1)
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
@@ -407,12 +408,15 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is FillElipse fill_elipse)
                     {
-                        int x1 = fill_elipse.p1.X;
-                        int x2 = fill_elipse.p2.X;
-                        int y1 = fill_elipse.p1.Y;
-                        int y2 = fill_elipse.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        double distance = Math.Sqrt(Math.Pow(e.X - fill_elipse.center.X, 2) / Math.Pow(fill_elipse.a, 2) + Math.Pow(e.Y - fill_elipse.center.Y, 2) / Math.Pow(fill_elipse.b, 2));
+                        posZoom = fill_elipse.getPosZoom(e.X, e.Y);
+                        if (posZoom != -1 && selected.Contains(fill_elipse))
+                        {
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            return;
+                        }
+                        else if (distance <= 1)
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
@@ -434,15 +438,15 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is RectangleGraphic rectangle)
                     {
-                        int x1 = rectangle.p1.X;
-                        int x2 = rectangle.p2.X;
-                        int y1 = rectangle.p1.Y;
-                        int y2 = rectangle.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        int xMin = Math.Min(rectangle.p1.X, rectangle.p2.X);
+                        int yMin = Math.Min(rectangle.p1.Y, rectangle.p2.Y);
+                        int width = Math.Abs(rectangle.p2.X - rectangle.p1.X);
+                        int height = Math.Abs(rectangle.p2.Y - rectangle.p1.Y);                      
+                        posZoom = rectangle.getPosZoom(e.X, e.Y);
+                        if (e.X >= xMin - 10 && e.X <= xMin + width + 10 && e.Y >= yMin - 10 && e.Y <= yMin + height + 10)
                         {
                             isSelected = true;
-                            x = e.X; y = e.Y;
+                            x = e.X; y = e.Y;                            
                             if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
@@ -461,12 +465,12 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is FillRectangle fill_rectangle)
                     {
-                        int x1 = fill_rectangle.p1.X;
-                        int x2 = fill_rectangle.p2.X;
-                        int y1 = fill_rectangle.p1.Y;
-                        int y2 = fill_rectangle.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        int xMin = Math.Min(fill_rectangle.p1.X, fill_rectangle.p2.X);
+                        int yMin = Math.Min(fill_rectangle.p1.Y, fill_rectangle.p2.Y);
+                        int width = Math.Abs(fill_rectangle.p2.X - fill_rectangle.p1.X);
+                        int height = Math.Abs(fill_rectangle.p2.Y - fill_rectangle.p1.Y);
+                        posZoom = fill_rectangle.getPosZoom(e.X, e.Y);
+                        if (e.X >= xMin - 10 && e.X <= xMin + width + 10 && e.Y >= yMin - 10 && e.Y <= yMin + height + 10)
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
@@ -488,12 +492,15 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is Circle circle)
                     {
-                        int x1 = circle.p1.X;
-                        int x2 = circle.p2.X;
-                        int y1 = circle.p1.Y;
-                        int y2 = circle.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        double distance = Math.Sqrt(Math.Pow(e.X - circle.center.X, 2) + Math.Pow(e.Y - circle.center.Y, 2));
+                        posZoom = circle.getPosZoom(e.X, e.Y);
+                        if (posZoom != -1 && selected.Contains(circle))
+                        {
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            return;
+                        }
+                        else if (distance <= circle.radius)
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
@@ -515,12 +522,15 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is FillCircle fill_circle)
                     {
-                        int x1 = fill_circle.p1.X;
-                        int x2 = fill_circle.p2.X;
-                        int y1 = fill_circle.p1.Y;
-                        int y2 = fill_circle.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                        double distance = Math.Sqrt(Math.Pow(e.X - fill_circle.center.X, 2) + Math.Pow(e.Y - fill_circle.center.Y, 2));
+                        posZoom = fill_circle.getPosZoom(e.X, e.Y);
+                        if (posZoom != -1 && selected.Contains(fill_circle))
+                        {
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            return;
+                        }
+                        else if (distance <= fill_circle.radius)
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
@@ -657,17 +667,32 @@ namespace MIDTERM_PROJECTS
 
         }
         private void pnlMain_MouseMove(object sender, MouseEventArgs e)
-        {
+        {            
             if (isSelected)
             {
-                int deltaX = e.X - x;
-                int deltaY = e.Y - y;
-                foreach(Graphic obj in selected)
+                if (posZoom != -1)
                 {
-                    int index = graphics.IndexOf(obj);
-                    graphics[index].Move(deltaX, deltaY);                   
+                    int deltaX = e.X - x;
+                    int deltaY = e.Y - y;
+                    foreach (Graphic obj in selected)
+                    {
+                        int index = graphics.IndexOf(obj);
+
+                        graphics[index].Zoom(posZoom, deltaX, deltaY);
+                    }                   
                 }
-                x = e.X; y = e.Y;
+                else
+                {
+                    int deltaX = e.X - x;
+                    int deltaY = e.Y - y;
+                    foreach (Graphic obj in selected)
+                    {
+                        int index = graphics.IndexOf(obj);
+                        graphics[index].Move(deltaX, deltaY);
+                    }                    
+                    
+                }
+                x = e.X; y = e.Y; 
                 this.pnlMain.Refresh();
             }
             else if (isPress)
@@ -677,8 +702,8 @@ namespace MIDTERM_PROJECTS
             }
         }
         private void pnlMain_MouseUp(object sender, MouseEventArgs e)
-        {
-            isSelected = false;                      
+        {           
+            posZoom = -1;
             if (isPress)
             {
                 this.graphics[this.graphics.Count - 1].p2 = e.Location;               
@@ -698,6 +723,7 @@ namespace MIDTERM_PROJECTS
                 isPolygon = false;
                 isRectangle = false;
             }
+            isSelected = false;
             this.pnlMain.Refresh();
         }
 

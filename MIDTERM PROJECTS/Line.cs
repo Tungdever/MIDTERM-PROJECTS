@@ -38,12 +38,70 @@ namespace MIDTERM_PROJECTS
 
             }            
         }
+
+        public override int getPosZoom(int mouseDownX, int mouseDownY)
+        {
+            if (mouseDownX >= p1.X - 10 && mouseDownX <= p1.X + 10 && mouseDownY >= p1.Y - 10 && mouseDownY <= p1.Y + 10) 
+            {
+                return 0;
+            }
+            else if (mouseDownX >= p2.X - 10 && mouseDownX <= p2.X + 10 && mouseDownY >= p2.Y - 10 && mouseDownY <= p2.Y + 10)
+            {
+                return 9;
+            }
+            return -1;
+        }
+
         public override void Move(int deltaX, int deltaY)
         {
             p1.X += deltaX;
             p1.Y += deltaY;
             p2.X += deltaX;
             p2.Y += deltaY;
+        }
+        public override void Zoom(int pos, int deltaX, int deltaY)
+        {
+            switch (pos)
+            {
+                case 0:
+                    p1.X += deltaX;
+                    p1.Y += deltaY;
+                    break;
+                case 1:
+                    p1.X += deltaX;
+                    p1.Y += deltaY;
+                    break;
+                case 2:
+                    p1.Y += deltaY;
+                    break;
+                case 3:
+                    p1.Y += deltaY;
+                    p2.X += deltaX;
+                    break;
+                case 4:
+                    p2.X += deltaX;
+                    break;
+                case 5:
+                    p2.X += deltaX;
+                    p2.Y += deltaY;
+                    break;
+                case 6:
+                    p2.Y += deltaY;
+                    break;
+                case 7:
+                    p1.X += deltaX;
+                    p2.Y += deltaY;
+                    break;
+                case 8:
+                    p1.X += deltaX;
+                    break;
+                case 9:
+                    p2.X += deltaX;
+                    p2.Y += deltaY;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace MIDTERM_PROJECTS
 {
@@ -6,6 +8,7 @@ namespace MIDTERM_PROJECTS
     {
         public Color myColor;
         RectangleF myRectangleF;
+        public List<Point> lPoints = new List<Point>();
         public FillRectangle(Color myColor)
         {
             this.myColor = myColor;
@@ -62,7 +65,20 @@ namespace MIDTERM_PROJECTS
                 resizePoints[7] = new Point((int)myRectangleF.X, (int)myRectangleF.Y + (int)myRectangleF.Height / 2);// Middle-left
                 rectangles[7] = new RectangleF(resizePoints[7].X - 5, resizePoints[7].Y - 5, 10, 10);
                 gp.FillRectangles(myBrush, rectangles);
+                lPoints = resizePoints.ToList();
             }
+        }
+
+        public override int getPosZoom(int mouseDownX, int mouseDownY)
+        {
+            for(int i = 0; i < lPoints.Count(); i++)
+            {
+                if (mouseDownX >= lPoints[i].X - 10 && mouseDownX <= lPoints[i].X + 10 && mouseDownY >= lPoints[i].Y - 10 && mouseDownY <= lPoints[i].Y + 10)
+                {
+                    return i + 1;
+                }
+            }
+            return -1;
         }
 
         public override void Move(int deltaX, int deltaY)
@@ -71,6 +87,47 @@ namespace MIDTERM_PROJECTS
             p1.Y += deltaY;
             p2.X += deltaX;
             p2.Y += deltaY;
+        }
+
+        public override void Zoom(int pos, int deltaX, int deltaY)
+        {
+            switch (pos)
+            {
+                case 0:
+                    break;
+                case 1:
+                    p1.X += deltaX;
+                    p1.Y += deltaY;
+                    break;
+                case 2:
+                    p1.Y += deltaY;
+                    break;
+                case 3:
+                    p1.Y += deltaY;
+                    p2.X += deltaX;
+                    break;
+                case 4:
+                    p2.X += deltaX;
+                    break;
+                case 5:
+                    p2.X += deltaX;
+                    p2.Y += deltaY;
+                    break;
+                case 6:
+                    p2.Y += deltaY;
+                    break;
+                case 7:
+                    p1.X += deltaX;
+                    p2.Y += deltaY;
+                    break;
+                case 8:
+                    p1.X += deltaX;
+                    break;
+                case 9:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

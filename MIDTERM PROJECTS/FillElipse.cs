@@ -14,10 +14,35 @@ namespace MIDTERM_PROJECTS
         {
             this.myColor = myColor;
         }
+        public List<Point> lPoints = new List<Point>();
+        public Point center = new Point();
+        public float a, b;
         public override void Draw(Graphics gp, bool isSelected)
         {
             Brush myBrush = new SolidBrush(myColor);
-            RectangleF myRectangleF = new RectangleF(p1, new Size(p2.X - p1.X, p2.Y - p1.Y));
+            RectangleF myRectangleF = new RectangleF();
+            int centerX = (p1.X + p2.X) / 2;
+            int centerY = (p1.Y + p2.Y) / 2;
+            center.X = centerX;
+            center.Y = centerY;
+            if (p2.Y >= p1.Y)
+            {
+                if (p2.X > p1.X) myRectangleF = new RectangleF(p1.X, p1.Y, p2.X - p1.X, p2.Y - p1.Y);
+                else
+                {
+                    myRectangleF = new RectangleF(p2.X, p1.Y, p1.X - p2.X, p2.Y - p1.Y);
+                }
+            }
+            else if (p2.Y < p1.Y)
+            {
+                if (p2.X > p1.X) myRectangleF = new RectangleF(p1.X, p2.Y, p2.X - p1.X, p1.Y - p2.Y);
+                else
+                {
+                    myRectangleF = new RectangleF(p2.X, p2.Y, p1.X - p2.X, p1.Y - p2.Y);
+                }
+            }
+            a = Math.Max(myRectangleF.Width / 2, myRectangleF.Height / 2);
+            b = Math.Min(myRectangleF.Width / 2, myRectangleF.Height / 2);
             gp.FillEllipse(myBrush, myRectangleF);
             if (isSelected)
             {
@@ -55,7 +80,20 @@ namespace MIDTERM_PROJECTS
                 lineOfResize[7] = new Point((int)myRectangleF.Left, (int)(myRectangleF.Top + myRectangleF.Height / 2));
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
                 gp.DrawPolygon(PenOfLineResize, lineOfResize);
+                lPoints = lineOfResize.ToList();
             }
+        }
+
+        public override int getPosZoom(int mouseDownX, int mouseDownY)
+        {
+            for (int i = 0; i < lPoints.Count(); i++)
+            {
+                if (mouseDownX >= lPoints[i].X - 10 && mouseDownX <= lPoints[i].X + 10 && mouseDownY >= lPoints[i].Y - 10 && mouseDownY <= lPoints[i].Y + 10)
+                {
+                    return i + 1;
+                }
+            }
+            return -1;
         }
 
         public override void Move(int deltaX, int deltaY)
@@ -64,6 +102,47 @@ namespace MIDTERM_PROJECTS
             p1.Y += deltaY;
             p2.X += deltaX;
             p2.Y += deltaY;
+        }
+
+        public override void Zoom(int pos, int deltaX, int deltaY)
+        {
+            switch (pos)
+            {
+                case 0:
+                    break;
+                case 1:
+                    p1.X += deltaX;
+                    p1.Y += deltaY;
+                    break;
+                case 2:
+                    p1.Y += deltaY;
+                    break;
+                case 3:
+                    p1.Y += deltaY;
+                    p2.X += deltaX;
+                    break;
+                case 4:
+                    p2.X += deltaX;
+                    break;
+                case 5:
+                    p2.X += deltaX;
+                    p2.Y += deltaY;
+                    break;
+                case 6:
+                    p2.Y += deltaY;
+                    break;
+                case 7:
+                    p1.X += deltaX;
+                    p2.Y += deltaY;
+                    break;
+                case 8:
+                    p1.X += deltaX;
+                    break;
+                case 9:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
