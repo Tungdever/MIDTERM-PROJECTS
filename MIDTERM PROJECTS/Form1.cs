@@ -599,6 +599,13 @@ namespace MIDTERM_PROJECTS
                                 maxY = point.Y;
                             }
                         }
+                        posZoom = polygon.getPosZoom(e.X, e.Y);
+                        if (posZoom != -1 && selected.Contains(polygon))
+                        {
+                            isSelected = true;
+                            x = e.X; y = e.Y;
+                            return;
+                        }
                         if (e.X >= minX && e.X <= maxX && e.Y >= minY && e.Y <= maxY)
                         {
                             isSelected = true;

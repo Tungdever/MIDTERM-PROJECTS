@@ -11,7 +11,8 @@ namespace MIDTERM_PROJECTS
     {
         public List<Point> lPoint;
         public Pen myPen;
-        
+        public List<Point> lPointsResize = new List<Point>();
+        public int minX, maxX, minY, maxY;
         public Polygon(List<Point> lPoint, Pen myPen)
         {
             this.lPoint = lPoint;
@@ -30,7 +31,7 @@ namespace MIDTERM_PROJECTS
             gp.DrawPolygon(myPen, lPoint.ToArray());
             if (isSelected)
             {
-                int minX = int.MaxValue, maxX = int.MinValue, minY = int.MaxValue, maxY = int.MinValue;
+                minX = int.MaxValue; maxX = int.MinValue; minY = int.MaxValue; maxY = int.MinValue;
                 foreach (Point point in lPoint)
                 {
                     if (point.X < minX)
@@ -87,19 +88,212 @@ namespace MIDTERM_PROJECTS
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
                 gp.DrawPolygon(PenOfLineResize, lineOfResize);
                 gp.FillRectangles(myBrush, resizePoints);
-                
-                
+                lPointsResize = lineOfResize.ToList();
             }
         }
 
         public override void Zoom(int pos, int deltaX, int deltaY)
         {
-            throw new NotImplementedException();
+            switch (pos)
+            {
+                case 0:
+                    break;
+                case 1:
+                    for (int i = 0; i < lPoint.Count; i++)
+                    {
+                        if (lPoint[i].X == maxX)
+                        {
+                            Point p = new Point(lPoint[i].X, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                            
+                        }
+                        else if (lPoint[i].Y == maxY)
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y);
+                            lPoint[i] = p;
+                        }
+                        else
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                    }
+                    break;
+                case 2:
+                    for (int i = 0; i < lPoint.Count; i++)
+                    {
+                        if (lPoint[i].X == minX)
+                        {
+                            Point p = new Point(lPoint[i].X, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }         
+                        else if (lPoint[i].X == maxX)
+                        {
+                            Point p = new Point(lPoint[i].X, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                        else if (lPoint[i].Y == maxY)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                    }
+                    break;
+                case 3:
+                    for (int i = 0; i < lPoint.Count; i++)
+                    {
+                        if (lPoint[i].X == minX)
+                        {
+                            Point p = new Point(lPoint[i].X, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                        else if (lPoint[i].Y == maxY)
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y);
+                            lPoint[i] = p;
+                        }
+                        else
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                    }
+                    break;
+                case 4:
+                    for (int i = 0; i < lPoint.Count; i++)
+                    {
+                        if (lPoint[i].X == maxX)
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y );
+                            lPoint[i] = p;
+                        }
+                        else if (lPoint[i].Y == minY)
+                        {
+                            continue;
+                        }
+                        else if (lPoint[i].X == minX)
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y);
+                            lPoint[i] = p;
+                        }
+                        else
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                    }
+                    break;
+                case 5:
+                    for (int i = 0; i < lPoint.Count; i++)
+                    {
+                        if (lPoint[i].X == minX)
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y);
+                            lPoint[i] = p;
+
+                        }
+                        else if (lPoint[i].Y == minY)
+                        {
+                            Point p = new Point(lPoint[i].X, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                        else
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                    }
+                    break;
+                case 6:
+                    for (int i = 0; i < lPoint.Count; i++)
+                    {
+                        if (lPoint[i].Y == minY)
+                        {
+                            continue;
+                        }
+                        else if (lPoint[i].X == minX)
+                        {
+                            Point p = new Point(lPoint[i].X, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                        else if (lPoint[i].X == maxX)
+                        {
+                            Point p = new Point(lPoint[i].X, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                        else
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                    }
+                    break;
+                case 7:
+                    for (int i = 0; i < lPoint.Count; i++)
+                    {
+                        if (lPoint[i].Y == minY)
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y);
+                            lPoint[i] = p;
+
+                        }
+                        else if (lPoint[i].X == maxX)
+                        {
+                            Point p = new Point(lPoint[i].X, lPoint[i].Y + deltaY );
+                            lPoint[i] = p;
+                        }
+                        else
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                    }
+                    break;
+                case 8:
+                    for (int i = 0; i < lPoint.Count; i++)
+                    {
+                        if (lPoint[i].X == minY)
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y);
+                            lPoint[i] = p;
+                        }
+                        else if (lPoint[i].X == maxX)
+                        {
+                            continue;
+                        }
+                        else if (lPoint[i].Y == maxY)
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y);
+                            lPoint[i] = p;
+                        }
+                        else
+                        {
+                            Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y + deltaY);
+                            lPoint[i] = p;
+                        }
+                    }
+                    break;
+                case 9:
+                    break;
+                default:
+                    break;
+            }
         }
 
         public override int getPosZoom(int mouseDownX, int mouseDownY)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < lPointsResize.Count(); i++)
+            {
+                if (mouseDownX >= lPointsResize[i].X - 10 && mouseDownX <= lPointsResize[i].X + 10 && mouseDownY >= lPointsResize[i].Y - 10 && mouseDownY <= lPointsResize[i].Y + 10)
+                {
+                    return i + 1;
+                }
+            }
+            return -1;
         }
     }
 }
