@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Schema;
 
 namespace MIDTERM_PROJECTS
 {
@@ -19,7 +20,7 @@ namespace MIDTERM_PROJECTS
         }
         public PointF center = new PointF();
         public float a, b;
-        public override void Draw(Graphics gp, bool isSelected)
+        public override void Draw(bool isSelected, PaintEventArgs e)
         {
             RectangleF myRectangleF = new RectangleF();
             float centerX = (p1.X + p2.X) / 2;
@@ -47,7 +48,7 @@ namespace MIDTERM_PROJECTS
             RectangleF bounds = path.GetBounds();
             a = bounds.Width / 2;
             b = bounds.Height / 2;
-            gp.DrawEllipse(this.myPen, myRectangleF);
+            e.Graphics.DrawEllipse(this.myPen, myRectangleF);
             minX = (int)myRectangleF.Left;
             maxX = (int)myRectangleF.Right;
             minY = (int)myRectangleF.Top;
@@ -73,7 +74,7 @@ namespace MIDTERM_PROJECTS
                 resizePoints[5] = new RectangleF((int)(myRectangleF.Left + myRectangleF.Right) / 2 - 5, myRectangleF.Bottom - 5, 10, 10);   // Bottom-center
                 resizePoints[6] = new RectangleF(myRectangleF.Left - 5, myRectangleF.Bottom - 5, 10, 10);           // Bottom-left
                 resizePoints[7] = new RectangleF(myRectangleF.Left - 5, (myRectangleF.Top + myRectangleF.Height / 2) - 5, 10, 10);        // Middle-left
-                gp.FillRectangles(myBrush, resizePoints);
+                e.Graphics.FillRectangles(myBrush, resizePoints);
                 Point[] lineOfResize = new Point[8];
                 lineOfResize[0] = new Point((int)myRectangleF.Left, (int)myRectangleF.Top);
                 lineOfResize[1] = new Point((int)((myRectangleF.Left + myRectangleF.Right) / 2), (int)myRectangleF.Top);
@@ -85,7 +86,7 @@ namespace MIDTERM_PROJECTS
                 lineOfResize[7] = new Point((int)myRectangleF.Left, (int)(myRectangleF.Top + myRectangleF.Height / 2));
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
                 
-                gp.DrawPolygon(PenOfLineResize, lineOfResize);
+                e.Graphics.DrawPolygon(PenOfLineResize, lineOfResize);
                 lPoints = lineOfResize.ToList();
             }
         }

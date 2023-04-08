@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Schema;
 
 namespace MIDTERM_PROJECTS
 {
@@ -18,7 +21,7 @@ namespace MIDTERM_PROJECTS
         public List<Point> lPoints = new List<Point>();
         public Point center = new Point();
         public int radius;
-        public override void Draw(Graphics gp, bool isSelected)
+        public override void Draw(bool isSelected, PaintEventArgs e)
         {
             Brush myBrush = new SolidBrush(myColor);
             int centerX = (p1.X + p2.X) / 2;
@@ -29,7 +32,7 @@ namespace MIDTERM_PROJECTS
             int x = centerX - radius;
             int y = centerY - radius;
             int size = 2 * radius;
-            gp.FillEllipse(myBrush, x, y, size, size);
+            e.Graphics.FillEllipse(myBrush, x, y, size, size);
             minX = x;
             minY = y;
             maxX = x + size;
@@ -55,7 +58,7 @@ namespace MIDTERM_PROJECTS
                 resizePoints[5] = new RectangleF(x + radius - 5, y + size - 5, 10, 10);   // Bottom-center
                 resizePoints[6] = new RectangleF(x - 5, y + size - 5, 10, 10);           // Bottom-left
                 resizePoints[7] = new RectangleF(x - 5, y + radius - 5, 10, 10);        // Middle-left
-                gp.FillRectangles(myBrush, resizePoints);
+                e.Graphics.FillRectangles(myBrush, resizePoints);
                 Point[] lineOfResize = new Point[8];
                 lineOfResize[0] = new Point(x, y);
                 lineOfResize[1] = new Point(x + radius, y);
@@ -67,7 +70,7 @@ namespace MIDTERM_PROJECTS
                 lineOfResize[7] = new Point(x, y + radius);
                 
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
-                gp.DrawPolygon(PenOfLineResize, lineOfResize);
+                e.Graphics.DrawPolygon(PenOfLineResize, lineOfResize);
                 lPoints = lineOfResize.ToList();
             }
         }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Schema;
 
 namespace MIDTERM_PROJECTS
 {
@@ -16,9 +19,9 @@ namespace MIDTERM_PROJECTS
             this.myPen = myPen;
             
         }
-        public override void Draw(Graphics gp, bool isSelected)
+        public override void Draw(bool isSelected, PaintEventArgs e)
         {
-            gp.DrawLine(myPen, p1, p2);
+            e.Graphics.DrawLine(myPen, p1, p2);
             minX = Math.Min(p1.X, p2.X);
             maxX = Math.Max(p1.X, p2.X);
             minY = Math.Min (p1.Y, p2.Y);
@@ -37,7 +40,7 @@ namespace MIDTERM_PROJECTS
                 }
                 rectangles[0] = new RectangleF(p1.X - 5, p1.Y - 5, 10, 10);
                 rectangles[1] = new RectangleF(p2.X - 5, p2.Y - 5, 10, 10);
-                gp.FillRectangles(myBrush, rectangles);
+                e.Graphics.FillRectangles(myBrush, rectangles);
 
             }            
         }

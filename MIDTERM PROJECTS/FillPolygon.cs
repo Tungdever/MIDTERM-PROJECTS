@@ -28,11 +28,11 @@ namespace MIDTERM_PROJECTS
             }
            
         }
-        public override void Draw(Graphics gp, bool isSelected)
+        public override void Draw(bool isSelected, PaintEventArgs e)
         {
             Brush myBrush = new SolidBrush(myColor);
             Point[] arrPoint = lPoint.ToArray();
-            gp.FillPolygon(myBrush, arrPoint);
+            e.Graphics.FillPolygon(myBrush, arrPoint);
             int minX = int.MaxValue, maxX = int.MinValue, minY = int.MaxValue, maxY = int.MinValue;
             foreach (Point point in lPoint)
             {
@@ -83,8 +83,8 @@ namespace MIDTERM_PROJECTS
                     resizePoints[i] = new RectangleF(lPoint[i].X - 5, lPoint[i].Y - 5, 10, 10);
                 }
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
-                gp.DrawPolygon(PenOfLineResize, lineOfResize);
-                gp.FillRectangles(myBrush, resizePoints);
+                e.Graphics.DrawPolygon(PenOfLineResize, lineOfResize);
+                e.Graphics.FillRectangles(myBrush, resizePoints);
 
 
             }

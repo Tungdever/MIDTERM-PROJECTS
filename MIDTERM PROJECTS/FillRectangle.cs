@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Schema;
 
 namespace MIDTERM_PROJECTS
 {
@@ -15,7 +20,7 @@ namespace MIDTERM_PROJECTS
             this.myColor = myColor;
 
         }
-        public override void Draw(Graphics gp, bool isSelected)
+        public override void Draw(bool isSelected, PaintEventArgs e)
         {
             Brush myBrush = new SolidBrush(myColor);
             if (p2.Y >= p1.Y)
@@ -25,7 +30,7 @@ namespace MIDTERM_PROJECTS
                 {
                     myRectangleF = new RectangleF(p2.X, p1.Y, p1.X - p2.X, p2.Y - p1.Y);
                 }
-                gp.FillRectangle(myBrush, myRectangleF);
+                e.Graphics.FillRectangle(myBrush, myRectangleF);
             }
             else if (p2.Y < p1.Y)
             {
@@ -34,7 +39,7 @@ namespace MIDTERM_PROJECTS
                 {
                     myRectangleF = new RectangleF(p2.X, p2.Y, p1.X - p2.X, p1.Y - p2.Y);
                 }
-                gp.FillRectangle(myBrush, myRectangleF);
+                e.Graphics.FillRectangle(myBrush, myRectangleF);
             }
             minX = (int)myRectangleF.Left;
             minY = (int)myRectangleF.Top;
@@ -69,7 +74,7 @@ namespace MIDTERM_PROJECTS
                 rectangles[6] = new RectangleF(resizePoints[6].X - 5, resizePoints[6].Y - 5, 10, 10);
                 resizePoints[7] = new Point((int)myRectangleF.X, (int)myRectangleF.Y + (int)myRectangleF.Height / 2);// Middle-left
                 rectangles[7] = new RectangleF(resizePoints[7].X - 5, resizePoints[7].Y - 5, 10, 10);
-                gp.FillRectangles(myBrush, rectangles);
+                e.Graphics.FillRectangles(myBrush, rectangles);
                 lPoints = resizePoints.ToList();
             }
         }

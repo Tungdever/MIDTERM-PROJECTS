@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
+using System.Xml.Schema;
 namespace MIDTERM_PROJECTS
 {
     public class Polygon :  Graphic
@@ -29,9 +31,9 @@ namespace MIDTERM_PROJECTS
             minY += deltaY;
             maxY += deltaY;
         }
-        public override void Draw(Graphics gp, bool isSelected)
+        public override void Draw(bool isSelected, PaintEventArgs e)
         {            
-            gp.DrawPolygon(myPen, lPoint.ToArray());
+            e.Graphics.DrawPolygon(myPen, lPoint.ToArray());
             minX = int.MaxValue; maxX = int.MinValue; minY = int.MaxValue; maxY = int.MinValue;
             foreach (Point point in lPoint)
             {
@@ -82,8 +84,8 @@ namespace MIDTERM_PROJECTS
                     resizePoints[i] = new RectangleF(lPoint[i].X - 5, lPoint[i].Y - 5, 10, 10);
                 }
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
-                gp.DrawPolygon(PenOfLineResize, lineOfResize);
-                gp.FillRectangles(myBrush, resizePoints);
+                e.Graphics.DrawPolygon(PenOfLineResize, lineOfResize);
+                e.Graphics.FillRectangles(myBrush, resizePoints);
                 lPointsResize = lineOfResize.ToList();
             }
         }

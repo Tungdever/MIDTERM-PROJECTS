@@ -14,13 +14,11 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.Devices;
-using static System.Windows.Forms.LinkLabel;
 
 namespace MIDTERM_PROJECTS
 {
     public partial class Form1 : Form
     {
-        Graphics gp;
         Color myColor;
         bool isLine = false;
         bool isEllipse = false;
@@ -55,7 +53,7 @@ namespace MIDTERM_PROJECTS
         public Form1()
         {
             InitializeComponent();
-            gp = this.pnlMain.CreateGraphics();            
+            this.pnlMain.SetDoubleBuffered();         
         }
         private void btnLine_Click(object sender, EventArgs e)
         {
@@ -259,11 +257,11 @@ namespace MIDTERM_PROJECTS
                     {
                         Graphic newPolygon = new Polygon(lSides, myPen);
                         graphics.Add(newPolygon);
-                        graphics[graphics.Count - 1].Draw(gp, false);
                         selected.Clear();
                         selected.Add(this.graphics[this.graphics.Count - 1]);
                         this.isPolygon = false;
                         this.isClickColtrols = false;
+                        this.pnlMain.Refresh();
                     }
                 }
                 else if (this.isFillPolygon)
@@ -274,11 +272,11 @@ namespace MIDTERM_PROJECTS
                     {
                         FillPolygon newFillPolygon = new FillPolygon(lSides, myColor);
                         graphics.Add(newFillPolygon);
-                        graphics[graphics.Count - 1].Draw(gp, false);
                         selected.Clear();
                         selected.Add(this.graphics[this.graphics.Count - 1]);
                         this.isFillPolygon = false;
                         this.isClickColtrols = false;
+                        this.pnlMain.Refresh();
                     }
                 }
                 else
@@ -1133,8 +1131,8 @@ namespace MIDTERM_PROJECTS
         {
             foreach (Graphic graphic in graphics)
             {
-                if (selected.Contains(graphic))  graphic.Draw(gp,true);
-                else graphic.Draw(gp,false);
+                if (selected.Contains(graphic))  graphic.Draw(true, e);
+                else graphic.Draw(false, e);
             }
         }
     }

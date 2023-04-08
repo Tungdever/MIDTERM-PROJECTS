@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Schema;
 
 namespace MIDTERM_PROJECTS
 {
@@ -14,13 +15,13 @@ namespace MIDTERM_PROJECTS
         public List<Graphic> graphics= new List<Graphic>();
         public List<PointF> lPoints = new List<PointF>();
         
-        public override void Draw(Graphics gp, bool isSelected)
+        public override void Draw(bool isSelected, PaintEventArgs e)
         {
             minX = int.MaxValue; maxX = int.MinValue; minY = int.MaxValue; maxY = int.MinValue;
             //MessageBox.Show(this.graphics.Count.ToString());
             foreach (Graphic g in graphics)
             {
-                g.Draw(gp, false);
+                g.Draw(false, e);
                 minX = Math.Min(minX, g.minX);
                 maxX = Math.Max(maxX, g.maxX);
                 minY = Math.Min(minY, g.minY);
@@ -42,7 +43,7 @@ namespace MIDTERM_PROJECTS
                 resizePoints[5] = new RectangleF(centerX - 5, maxY - 5, 10, 10);   // Bottom-center
                 resizePoints[6] = new RectangleF(minX - 5, maxY - 5, 10, 10);           // Bottom-left
                 resizePoints[7] = new RectangleF(minX - 5, centerY - 5, 10, 10);        // Middle-left
-                gp.FillRectangles(myBrush, resizePoints);
+                e.Graphics.FillRectangles(myBrush, resizePoints);
                 PointF[] lineOfResize = new PointF[8];
                 lineOfResize[0] = new PointF(minX, minY);
                 lineOfResize[1] = new PointF(centerX, minY);
@@ -53,7 +54,7 @@ namespace MIDTERM_PROJECTS
                 lineOfResize[6] = new PointF(minX, maxY);
                 lineOfResize[7] = new PointF(minX, centerY);
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
-                gp.DrawPolygon(PenOfLineResize, lineOfResize);
+                e.Graphics.DrawPolygon(PenOfLineResize, lineOfResize);
                 lPoints = lineOfResize.ToList();
             }
         }
