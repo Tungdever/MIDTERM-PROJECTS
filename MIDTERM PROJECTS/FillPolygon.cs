@@ -92,8 +92,11 @@ namespace MIDTERM_PROJECTS
 
         public override void Zoom(int pos, int deltaX, int deltaY)
         {
-            Point point = new Point(lPoint[pos].X + deltaX, lPoint[pos].Y + deltaY);
-            lPoint[pos] = point;
+            if (pos >= 10)
+            {
+                Point point = new Point(lPoint[pos - 10].X + deltaX, lPoint[pos - 10].Y + deltaY);
+                lPoint[pos - 10] = point;
+            }
         }
 
         public override int getPosZoom(int mouseDownX, int mouseDownY)
