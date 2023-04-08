@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
@@ -35,6 +36,10 @@ namespace MIDTERM_PROJECTS
                 }
                 gp.FillRectangle(myBrush, myRectangleF);
             }
+            minX = (int)myRectangleF.Left;
+            minY = (int)myRectangleF.Top;
+            maxX = (int)myRectangleF.Right;
+            maxY = (int)myRectangleF.Bottom;
             if (isSelected)
             {
 
@@ -87,6 +92,7 @@ namespace MIDTERM_PROJECTS
             p1.Y += deltaY;
             p2.X += deltaX;
             p2.Y += deltaY;
+         
         }
 
         public override void Zoom(int pos, int deltaX, int deltaY)

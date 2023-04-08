@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,20 +16,38 @@ namespace MIDTERM_PROJECTS
         {
             this.myPen = myPen;
         }
+        public List<Point> lPoints = new List<Point>();
+        public PointF center = new PointF();
+        public float radius;
+        public float startAngle;
+        public float endAngle;
+        public GraphicsPath path;
+        private static PointF PointOnEllipse(float cx, float cy, float rx, float ry, float theta)
+        {
+            float x = (float)(cx + rx * Math.Cos(theta));
+            float y = (float)(cy + ry * Math.Sin(theta));
+            return new PointF(x, y);
+        }
         public override void Draw(Graphics gp, bool isSelected)
         {
-            float centerX = (p1.X + p2.X) / 2;
-            float centerY = (p1.Y + p2.Y) / 2;
-            float radius = (float)Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2)) / 2;
-            float startAngle = (float)(180 / Math.PI * Math.Atan2(p1.Y - centerY, p1.X - centerX));
-            float endAngle = (float)(180 / Math.PI * Math.Atan2(p2.Y - centerY, p2.X - centerX));
+            float centerX = (p1.X + p2.X) / 2f;
+            float centerY = (p1.Y + p2.Y) / 2f;
+            radius = (float)Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2)) / 2f;
+            startAngle = (float)(180 / Math.PI * Math.Atan2(p1.Y - centerY, p1.X - centerX));
+            endAngle = (float)(180 / Math.PI * Math.Atan2(p2.Y - centerY, p2.X - centerX));
             try
             {
-                gp.DrawArc(myPen, centerX - radius, centerY - radius, radius * 2, radius * 2, startAngle, endAngle);
+                gp.DrawArc(myPen, centerX - radius, centerY - radius, radius * 2f, radius * 2f, startAngle, endAngle);
+                
             }
             catch 
             { 
             }
+            path = new GraphicsPath();
+            path.AddArc(centerX-radius,centerY-radius,radius*2f,radius*2f,startAngle,endAngle);
+            //RectangleF bounds = path.GetBounds();
+            //a = bounds.Width / 2;
+            //b = bounds.Height / 2;
             if (isSelected)
             {
                 Brush myBrush;
@@ -64,14 +83,21 @@ namespace MIDTERM_PROJECTS
                 lineOfResize[6] = new Point((int)x, (int)(y + size));
                 lineOfResize[7] = new Point((int)x, (int)(y + radius));
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
-
                 gp.DrawPolygon(PenOfLineResize, lineOfResize);
+                lPoints = lineOfResize.ToList();
             }
         }
 
         public override int getPosZoom(int mouseDownX, int mouseDownY)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < lPoints.Count(); i++)
+            {
+                if (mouseDownX >= lPoints[i].X - 10 && mouseDownX <= lPoints[i].X + 10 && mouseDownY >= lPoints[i].Y - 10 && mouseDownY <= lPoints[i].Y + 10)
+                {
+                    return i + 1;
+                }
+            }
+            return -1;
         }
 
         public override void Move(int deltaX, int deltaY)
@@ -84,7 +110,43 @@ namespace MIDTERM_PROJECTS
 
         public override void Zoom(int pos, int deltaX, int deltaY)
         {
-            throw new NotImplementedException();
+            switch (pos)
+            {
+                case 0:
+                    break;
+                case 1:
+                    p1.X += deltaX;
+                    p1.Y += deltaY;
+                    break;
+                case 2:
+                    p1.Y += deltaY;
+                    break;
+                case 3:
+                    p1.Y += deltaY;
+                    p2.X += deltaX;
+                    break;
+                case 4:
+                    p2.X += deltaX;
+                    break;
+                case 5:
+                    p2.X += deltaX;
+                    p2.Y += deltaY;
+                    break;
+                case 6:
+                    p2.Y += deltaY;
+                    break;
+                case 7:
+                    p1.X += deltaX;
+                    p2.Y += deltaY;
+                    break;
+                case 8:
+                    p1.X += deltaX;
+                    break;
+                case 9:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

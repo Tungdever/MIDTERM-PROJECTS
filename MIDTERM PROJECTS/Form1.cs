@@ -286,39 +286,39 @@ namespace MIDTERM_PROJECTS
                     isPress = true;
                     if (this.isLine)
                     {
-                        Graphic newLine = new Line(myPen);
+                        Line newLine = new Line(myPen);
                         newLine.p1 = e.Location;
                         graphics.Add(newLine);
                     }
                     else if (this.isEllipse)
                     {
-                        Graphic newElipse = new Elipse(myPen);
+                        Elipse newElipse = new Elipse(myPen);
                         newElipse.p1 = e.Location;
                         graphics.Add(newElipse);
                     }
                     else if (this.isFillElipse)
                     {
-                        Graphic newFillElipse = new FillElipse(myColor);
+                        FillElipse newFillElipse = new FillElipse(myColor);
                         newFillElipse.p1 = e.Location;
                         graphics.Add(newFillElipse);
 
                     }
                     else if (this.isRectangle)
                     {
-                        Graphic newRectangle = new RectangleGraphic(myPen);
+                        RectangleGraphic newRectangle = new RectangleGraphic(myPen);
                         newRectangle.p1 = e.Location;
                         graphics.Add(newRectangle);
 
                     }
                     else if (this.isFillRectangle)
                     {
-                        Graphic newFillRectangle = new FillRectangle(myColor);
+                        FillRectangle newFillRectangle = new FillRectangle(myColor);
                         newFillRectangle.p1 = e.Location;
                         graphics.Add(newFillRectangle);
                     }
                     else if (this.isCircle)
                     {
-                        Graphic newCircle = new Circle(myPen);
+                        Circle newCircle = new Circle(myPen);
                         newCircle.p1 = e.Location;
                         graphics.Add(newCircle);
 
@@ -326,14 +326,14 @@ namespace MIDTERM_PROJECTS
                     else if (this.isFillCircle)
                     {
 
-                        Graphic newFillCircle = new FillCircle(myColor);
+                        FillCircle newFillCircle = new FillCircle(myColor);
                         newFillCircle.p1 = e.Location;
                         graphics.Add(newFillCircle);
 
                     }
                     else if (this.isArc)
                     {
-                        Graphic newArc = new Arc(myPen);
+                        Arc newArc = new Arc(myPen);
                         newArc.p1 = e.Location;
                         graphics.Add(newArc);
                     }
@@ -347,7 +347,6 @@ namespace MIDTERM_PROJECTS
                     {
                         int mouseX = e.X;
                         int mouseY = e.Y;
-
                         // Tính toán hệ số góc và hệ số y tại điểm click để kiểm tra xem nó có nằm trên đường thẳng không
                         float slope = (line.p2.Y - line.p1.Y) / (float)(line.p2.X - line.p1.X);
                         float yIntercept = line.p1.Y - slope * line.p1.X;
@@ -357,14 +356,41 @@ namespace MIDTERM_PROJECTS
                         posZoom = line.getPosZoom(e.X, e.Y);
                         if (Math.Abs(mouseY - expectedY) < 5)
                         {
-                            isSelected = true;
-                            x = e.X; y = e.Y;
-                            if (selected.Contains(graphics[i]))
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }                            
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach(Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+                                    
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -378,7 +404,9 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is Elipse elipse)
                     {
-                        double distance = Math.Sqrt(Math.Pow(e.X - elipse.center.X, 2) / Math.Pow(elipse.a, 2) + Math.Pow(e.Y - elipse.center.Y, 2) / Math.Pow(elipse.b, 2));
+                        double dx = e.X - elipse.center.X;
+                        double dy = e.Y - elipse.center.Y;
+                        double distance = Math.Pow(dx / elipse.a, 2) + Math.Pow(dy / elipse.b, 2);
                         posZoom = elipse.getPosZoom(e.X, e.Y);
                         if (posZoom != -1 && selected.Contains(elipse))
                         {
@@ -386,16 +414,43 @@ namespace MIDTERM_PROJECTS
                             x = e.X; y = e.Y;
                             return;
                         }
-                        else if (distance <= 1)
+                        else if (distance <= 1.1)
                         {
-                            isSelected = true;
-                            x = e.X; y = e.Y;
-                            if (selected.Contains(graphics[i]))
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach (Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -408,7 +463,9 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is FillElipse fill_elipse)
                     {
-                        double distance = Math.Sqrt(Math.Pow(e.X - fill_elipse.center.X, 2) / Math.Pow(fill_elipse.a, 2) + Math.Pow(e.Y - fill_elipse.center.Y, 2) / Math.Pow(fill_elipse.b, 2));
+                        double dx = e.X - fill_elipse.center.X;
+                        double dy = e.Y - fill_elipse.center.Y;
+                        double distance = Math.Pow(dx / fill_elipse.a, 2) + Math.Pow(dy / fill_elipse.b, 2);
                         posZoom = fill_elipse.getPosZoom(e.X, e.Y);
                         if (posZoom != -1 && selected.Contains(fill_elipse))
                         {
@@ -418,14 +475,41 @@ namespace MIDTERM_PROJECTS
                         }
                         else if (distance <= 1)
                         {
-                            isSelected = true;
-                            x = e.X; y = e.Y;
-                            if (selected.Contains(graphics[i]))
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach (Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -445,14 +529,41 @@ namespace MIDTERM_PROJECTS
                         posZoom = rectangle.getPosZoom(e.X, e.Y);
                         if (e.X >= xMin - 10 && e.X <= xMin + width + 10 && e.Y >= yMin - 10 && e.Y <= yMin + height + 10)
                         {
-                            isSelected = true;
-                            x = e.X; y = e.Y;                            
-                            if (selected.Contains(graphics[i]))
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach (Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -472,14 +583,41 @@ namespace MIDTERM_PROJECTS
                         posZoom = fill_rectangle.getPosZoom(e.X, e.Y);
                         if (e.X >= xMin - 10 && e.X <= xMin + width + 10 && e.Y >= yMin - 10 && e.Y <= yMin + height + 10)
                         {
-                            isSelected = true;
-                            x = e.X; y = e.Y;
-                            if (selected.Contains(graphics[i]))
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach (Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -500,16 +638,43 @@ namespace MIDTERM_PROJECTS
                             x = e.X; y = e.Y;
                             return;
                         }
-                        else if (distance <= circle.radius)
+                        else if (distance <= circle.radius + 5)
                         {
-                            isSelected = true;
-                            x = e.X; y = e.Y;
-                            if (selected.Contains(graphics[i]))
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach (Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -530,16 +695,43 @@ namespace MIDTERM_PROJECTS
                             x = e.X; y = e.Y;
                             return;
                         }
-                        else if (distance <= fill_circle.radius)
+                        else if (distance <= fill_circle.radius + 5)
                         {
-                            isSelected = true;
-                            x = e.X; y = e.Y;
-                            if (selected.Contains(graphics[i]))
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach (Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -551,22 +743,51 @@ namespace MIDTERM_PROJECTS
                         }
                     }
                     else if (graphics[i] is Arc arc)
-                    {
-                        int x1 = arc.p1.X;
-                        int x2 = arc.p2.X;
-                        int y1 = arc.p1.Y;
-                        int y2 = arc.p2.Y;
-                        if (x1 > x2) Swap(ref x1, ref x2);
-                        if (e.X >= x1 && e.X <= x2 && e.Y >= y1 && e.Y <= y2)
+                    {                                            
+                        posZoom = arc.getPosZoom(e.X, e.Y);                        
+                        if (posZoom != -1 && selected.Contains(arc))
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
-                            if (selected.Contains(graphics[i]))
+                            return;
+                        }
+                        else if (arc.path.IsVisible(e.Location))
+                        {
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach (Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -575,6 +796,7 @@ namespace MIDTERM_PROJECTS
                                 }
                             }
                             return;
+
                         }
                     }
                     else if (graphics[i] is Polygon polygon)
@@ -608,14 +830,41 @@ namespace MIDTERM_PROJECTS
                         }
                         if (e.X >= minX && e.X <= maxX && e.Y >= minY && e.Y <= maxY)
                         {
-                            isSelected = true;
-                            x = e.X; y = e.Y;
-                            if (selected.Contains(graphics[i]))
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach (Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -648,16 +897,113 @@ namespace MIDTERM_PROJECTS
                                 maxY = point.Y;
                             }
                         }
-                        if (e.X >= minX && e.X <= maxX && e.Y >= minY && e.Y <= maxY)
+                        posZoom = fill_polygon.getPosZoom(e.X, e.Y);
+                        if (posZoom != -1 && selected.Contains(fill_polygon))
                         {
                             isSelected = true;
                             x = e.X; y = e.Y;
-                            if (selected.Contains(graphics[i]))
+                            return;
+                        }
+                        if (e.X >= minX && e.X <= maxX && e.Y >= minY && e.Y <= maxY)
+                        {
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
                             {
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right)
+                                {
+                                    GroupGraphics polyOjb = new GroupGraphics();
+                                    foreach (Graphic item in selected)
+                                    {
+                                        polyOjb.graphics.Add(item);
+                                    }
+                                    graphics.Add(polyOjb);
+
+                                    foreach (Graphic item in selected)
+                                    {
+                                        graphics.Remove(item);
+                                    }
+                                    selected.Clear();
+                                    selected.Add(polyOjb);
+                                    this.pnlMain.Refresh();
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                             }
                             else
                             {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
+                                if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                else
+                                {
+                                    selected.Clear();
+                                    selected.Add(graphics[i]);
+                                }
+                            }
+                            return;
+                        }
+                    }
+                    else if (graphics[i] is GroupGraphics gg)
+                    {                     
+                        posZoom = gg.getPosZoom(e.X, e.Y);
+                        if (e.X >= gg.minX - 10 && e.X <= gg.maxX + 10 && e.Y >= gg.minY - 10 && e.Y <= gg.maxY + 10)
+                        {
+                            if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Right)
+                            {
+                                if (selected.Count == 0)
+                                {
+                                    MessageBox.Show("Make a selection first.");
+                                }
+                                else MessageBox.Show("This is not a valid selection.");
+                            }
+                            else if (selected.Contains(graphics[i]))
+                            {
+                                if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
+                                else if (e.Button == MouseButtons.Right )
+                                {
+                                    if (selected.Count > 1)
+                                    {
+                                        GroupGraphics polyObj = new GroupGraphics();
+                                        foreach (Graphic item in selected)
+                                        {
+                                            polyObj.graphics.Add(item);
+                                        }
+                                        graphics.Add(polyObj);
+
+                                        foreach (Graphic item in selected)
+                                        {
+                                            graphics.Remove(item);
+                                        }
+                                        selected.Clear();
+                                        selected.Add(polyObj);
+                                        this.pnlMain.Refresh();
+                                    }
+                                    else
+                                    {
+                                        foreach (Graphic item in gg.graphics)
+                                        {
+                                            graphics.Add(item);
+                                            selected.Add(item);
+                                        }
+                                        graphics.Remove(gg);
+                                        selected.Remove(gg);
+                                    }
+                                }
+                                isSelected = true;
+                                x = e.X; y = e.Y;
+                            }
+                            else
+                            {
+                                isSelected = true;
+                                x = e.X; y = e.Y;
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
                                 else
                                 {
@@ -684,7 +1030,6 @@ namespace MIDTERM_PROJECTS
                     foreach (Graphic obj in selected)
                     {
                         int index = graphics.IndexOf(obj);
-
                         graphics[index].Zoom(posZoom, deltaX, deltaY);
                     }                   
                 }
@@ -733,7 +1078,6 @@ namespace MIDTERM_PROJECTS
             isSelected = false;
             this.pnlMain.Refresh();
         }
-
         private void ptbColor_Click(object sender, EventArgs e)
         {
             this.cldControls.ShowDialog();

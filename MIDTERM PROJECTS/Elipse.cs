@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -16,13 +17,13 @@ namespace MIDTERM_PROJECTS
         {          
             this.myPen = myPen;
         }
-        public Point center = new Point();
+        public PointF center = new PointF();
         public float a, b;
         public override void Draw(Graphics gp, bool isSelected)
         {
             RectangleF myRectangleF = new RectangleF();
-            int centerX = (p1.X + p2.X) / 2;
-            int centerY = (p1.Y + p2.Y) / 2;
+            float centerX = (p1.X + p2.X) / 2;
+            float centerY = (p1.Y + p2.Y) / 2;
             center.X = centerX;
             center.Y = centerY;
             if (p2.Y >= p1.Y)
@@ -41,9 +42,16 @@ namespace MIDTERM_PROJECTS
                     myRectangleF = new RectangleF(p2.X, p2.Y, p1.X - p2.X, p1.Y - p2.Y);
                 }           
             }
-            a = Math.Max(myRectangleF.Width / 2, myRectangleF.Height / 2);
-            b = Math.Min(myRectangleF.Width / 2, myRectangleF.Height / 2);
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(myRectangleF);
+            RectangleF bounds = path.GetBounds();
+            a = bounds.Width / 2;
+            b = bounds.Height / 2;
             gp.DrawEllipse(this.myPen, myRectangleF);
+            minX = (int)myRectangleF.Left;
+            maxX = (int)myRectangleF.Right;
+            minY = (int)myRectangleF.Top;
+            maxY = (int)myRectangleF.Bottom;
             if (isSelected)
             {
                 Brush myBrush;
@@ -76,6 +84,7 @@ namespace MIDTERM_PROJECTS
                 lineOfResize[6] = new Point((int)myRectangleF.Left, (int)myRectangleF.Bottom);
                 lineOfResize[7] = new Point((int)myRectangleF.Left, (int)(myRectangleF.Top + myRectangleF.Height / 2));
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
+                
                 gp.DrawPolygon(PenOfLineResize, lineOfResize);
                 lPoints = lineOfResize.ToList();
             }
@@ -99,6 +108,7 @@ namespace MIDTERM_PROJECTS
             p1.Y += deltaY;
             p2.X += deltaX;
             p2.Y += deltaY;
+
         }
 
         public override void Zoom(int pos, int deltaX, int deltaY)

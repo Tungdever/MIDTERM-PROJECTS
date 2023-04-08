@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,8 +42,15 @@ namespace MIDTERM_PROJECTS
                     myRectangleF = new RectangleF(p2.X, p2.Y, p1.X - p2.X, p1.Y - p2.Y);
                 }
             }
-            a = Math.Max(myRectangleF.Width / 2, myRectangleF.Height / 2);
-            b = Math.Min(myRectangleF.Width / 2, myRectangleF.Height / 2);
+            minX = (int)myRectangleF.Left;
+            maxX = (int)myRectangleF.Right;
+            minY = (int)myRectangleF.Top;
+            maxY = (int)myRectangleF.Bottom;
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(myRectangleF);
+            RectangleF bounds = path.GetBounds();
+            a = bounds.Width / 2;
+            b = bounds.Height / 2;
             gp.FillEllipse(myBrush, myRectangleF);
             if (isSelected)
             {
@@ -78,6 +86,7 @@ namespace MIDTERM_PROJECTS
                 lineOfResize[5] = new Point((int)(myRectangleF.Left + myRectangleF.Right) / 2, (int)myRectangleF.Bottom);
                 lineOfResize[6] = new Point((int)myRectangleF.Left, (int)myRectangleF.Bottom);
                 lineOfResize[7] = new Point((int)myRectangleF.Left, (int)(myRectangleF.Top + myRectangleF.Height / 2));
+                
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
                 gp.DrawPolygon(PenOfLineResize, lineOfResize);
                 lPoints = lineOfResize.ToList();
@@ -101,7 +110,7 @@ namespace MIDTERM_PROJECTS
             p1.X += deltaX;
             p1.Y += deltaY;
             p2.X += deltaX;
-            p2.Y += deltaY;
+            p2.Y += deltaY;           
         }
 
         public override void Zoom(int pos, int deltaX, int deltaY)

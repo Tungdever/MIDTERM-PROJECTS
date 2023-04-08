@@ -37,6 +37,10 @@ namespace MIDTERM_PROJECTS
                 }
                 gp.DrawRectangle(myPen, myRectangle);
             }
+            minX = myRectangle.Left;
+            minY = myRectangle.Top;
+            maxX = myRectangle.Right;
+            maxY = myRectangle.Bottom;
             if (isSelected)
             { 
 

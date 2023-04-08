@@ -19,11 +19,14 @@ namespace MIDTERM_PROJECTS
         public override void Draw(Graphics gp, bool isSelected)
         {
             gp.DrawLine(myPen, p1, p2);
-            
+            minX = Math.Min(p1.X, p2.X);
+            maxX = Math.Max(p1.X, p2.X);
+            minY = Math.Min (p1.Y, p2.Y);
+            maxY = Math.Max(p1.Y, p2.Y);
             if (isSelected)
             {
                 Brush myBrush;
-                RectangleF[] rectangles = new RectangleF[8];
+                RectangleF[] rectangles = new RectangleF[2];
                 if (myPen.Color.Equals(Color.Black) || myPen.Color.Equals(Color.White))
                 {
                     myBrush = new SolidBrush(Color.Blue);
@@ -58,6 +61,7 @@ namespace MIDTERM_PROJECTS
             p1.Y += deltaY;
             p2.X += deltaX;
             p2.Y += deltaY;
+         
         }
         public override void Zoom(int pos, int deltaX, int deltaY)
         {

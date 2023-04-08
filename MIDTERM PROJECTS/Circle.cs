@@ -25,7 +25,14 @@ namespace MIDTERM_PROJECTS
             center.X = centerX;
             center.Y = centerY;
             radius = (int)Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2)) / 2;
-            gp.DrawEllipse(myPen, centerX - radius, centerY - radius, radius * 2, radius * 2);
+            int x = centerX - radius;
+            int y = centerY - radius;
+            int size = 2 * radius;
+            gp.DrawEllipse(myPen, x, y, size, size);          
+            minX = x;
+            minY = y;
+            maxX = x + size;
+            maxY = y + size;
             if (isSelected)
             {
                 Brush myBrush;
@@ -38,9 +45,7 @@ namespace MIDTERM_PROJECTS
                 {
                     myBrush = new SolidBrush(Color.FromArgb(255 - myPen.Color.R, 255 - myPen.Color.G, 255 - myPen.Color.B));
                 }
-                int x = centerX - radius;
-                int y = centerY - radius;
-                int size = 2 * radius;
+                
                 RectangleF[] resizePoints = new RectangleF[8];
                 resizePoints[0] = new RectangleF(x - 5, y - 5, 10, 10);           // Top-left
                 resizePoints[1] = new RectangleF(x + radius - 5, y - 5, 10, 10);   // Top-center
@@ -60,6 +65,7 @@ namespace MIDTERM_PROJECTS
                 lineOfResize[5] = new Point(x + radius , y + size );
                 lineOfResize[6] = new Point(x , y + size );
                 lineOfResize[7] = new Point(x , y + radius );
+                
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
                 gp.DrawPolygon(PenOfLineResize, lineOfResize);
                 lPoints = lineOfResize.ToList();
@@ -84,6 +90,7 @@ namespace MIDTERM_PROJECTS
             p1.Y += deltaY;
             p2.X += deltaX;
             p2.Y += deltaY;
+           
         }
 
         public override void Zoom(int pos, int deltaX, int deltaY)

@@ -12,6 +12,8 @@ namespace MIDTERM_PROJECTS
     {
         public List<Point> lPoint;
         public Color myColor;
+        public List<Point> lPointsResize = new List<Point>();
+        public int minX, maxX, minY, maxY;
         public FillPolygon(List<Point> lPoint, Color myColor)
         {
             this.lPoint = lPoint;
@@ -24,34 +26,36 @@ namespace MIDTERM_PROJECTS
                 Point p = new Point(lPoint[i].X + deltaX, lPoint[i].Y + deltaY);
                 lPoint[i] = p;
             }
+           
         }
         public override void Draw(Graphics gp, bool isSelected)
         {
             Brush myBrush = new SolidBrush(myColor);
             Point[] arrPoint = lPoint.ToArray();
             gp.FillPolygon(myBrush, arrPoint);
+            int minX = int.MaxValue, maxX = int.MinValue, minY = int.MaxValue, maxY = int.MinValue;
+            foreach (Point point in lPoint)
+            {
+                if (point.X < minX)
+                {
+                    minX = point.X;
+                }
+                if (point.X > maxX)
+                {
+                    maxX = point.X;
+                }
+                if (point.Y < minY)
+                {
+                    minY = point.Y;
+                }
+                if (point.Y > maxY)
+                {
+                    maxY = point.Y;
+                }
+            }
             if (isSelected)
             {
-                int minX = int.MaxValue, maxX = int.MinValue, minY = int.MaxValue, maxY = int.MinValue;
-                foreach (Point point in lPoint)
-                {
-                    if (point.X < minX)
-                    {
-                        minX = point.X;
-                    }
-                    if (point.X > maxX)
-                    {
-                        maxX = point.X;
-                    }
-                    if (point.Y < minY)
-                    {
-                        minY = point.Y;
-                    }
-                    if (point.Y > maxY)
-                    {
-                        maxY = point.Y;
-                    }
-                }
+                
                 RectangleF[] rectangles = new RectangleF[8];
                 if (myColor.Equals(Color.Black) || myColor.Equals(Color.White))
                 {
@@ -73,18 +77,11 @@ namespace MIDTERM_PROJECTS
                         new Point(minX - 5,maxY + 5),
                         new Point(minX - 5, (minY + maxY) / 2)
                 };
-                RectangleF[] resizePoints =
+                RectangleF[] resizePoints = new RectangleF[lPoint.Count];
+                for (int i = 0; i < lPoint.Count; i++)
                 {
-                    new RectangleF(lineOfResize[0].X - 5,lineOfResize[0].Y - 5,10,10),
-                    new RectangleF(lineOfResize[1].X ,lineOfResize[1].Y - 5,10,10),
-                    new RectangleF(lineOfResize[2].X -5,lineOfResize[2].Y -5,10,10),
-                    new RectangleF(lineOfResize[3].X - 5, lineOfResize[3].Y ,10,10),
-                    new RectangleF(lineOfResize[4].X -5,lineOfResize[4].Y - 5,10,10),
-                    new RectangleF(lineOfResize[5].X ,lineOfResize[5].Y - 5,10,10),
-                    new RectangleF(lineOfResize[6].X - 5,lineOfResize[6].Y - 5,10,10),
-                    new RectangleF(lineOfResize[7].X - 5,lineOfResize[7].Y ,10,10)
-
-                };
+                    resizePoints[i] = new RectangleF(lPoint[i].X - 5, lPoint[i].Y - 5, 10, 10);
+                }
                 Pen PenOfLineResize = new Pen(Color.Black, 1);
                 gp.DrawPolygon(PenOfLineResize, lineOfResize);
                 gp.FillRectangles(myBrush, resizePoints);
@@ -95,12 +92,20 @@ namespace MIDTERM_PROJECTS
 
         public override void Zoom(int pos, int deltaX, int deltaY)
         {
-            throw new NotImplementedException();
+            Point point = new Point(lPoint[pos].X + deltaX, lPoint[pos].Y + deltaY);
+            lPoint[pos] = point;
         }
 
         public override int getPosZoom(int mouseDownX, int mouseDownY)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < lPoint.Count(); i++)
+            {
+                if (mouseDownX >= lPoint[i].X - 10 && mouseDownX <= lPoint[i].X + 10 && mouseDownY >= lPoint[i].Y - 10 && mouseDownY <= lPoint[i].Y + 10)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 }
