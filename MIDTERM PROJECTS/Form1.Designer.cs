@@ -58,6 +58,8 @@ namespace MIDTERM_PROJECTS
             this.btnDashDotType = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDashDotDotType = new System.Windows.Forms.ToolStripMenuItem();
             this.ptbColor = new System.Windows.Forms.PictureBox();
+            this.txtThickness = new System.Windows.Forms.TextBox();
+            this.lblThickness = new System.Windows.Forms.Label();
             this.pnlControls.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -180,6 +182,7 @@ namespace MIDTERM_PROJECTS
             this.pnlMain.Size = new System.Drawing.Size(1298, 708);
             this.pnlMain.TabIndex = 1;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
+            this.pnlMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseClick);
             this.pnlMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseDown);
             this.pnlMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseMove);
             this.pnlMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseUp);
@@ -187,6 +190,8 @@ namespace MIDTERM_PROJECTS
             // pnlControls
             // 
             this.pnlControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlControls.Controls.Add(this.lblThickness);
+            this.pnlControls.Controls.Add(this.txtThickness);
             this.pnlControls.Controls.Add(this.toolStrip3);
             this.pnlControls.Controls.Add(this.toolStrip2);
             this.pnlControls.Controls.Add(this.toolStrip1);
@@ -242,7 +247,7 @@ namespace MIDTERM_PROJECTS
             this.toolStripButton1});
             this.toolStrip2.Location = new System.Drawing.Point(611, 21);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(161, 38);
+            this.toolStrip2.Size = new System.Drawing.Size(122, 38);
             this.toolStrip2.TabIndex = 16;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -339,6 +344,28 @@ namespace MIDTERM_PROJECTS
             this.ptbColor.TabStop = false;
             this.ptbColor.Click += new System.EventHandler(this.ptbColor_Click);
             // 
+            // txtThickness
+            // 
+            this.txtThickness.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtThickness.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtThickness.Location = new System.Drawing.Point(1000, 26);
+            this.txtThickness.Multiline = true;
+            this.txtThickness.Name = "txtThickness";
+            this.txtThickness.Size = new System.Drawing.Size(87, 30);
+            this.txtThickness.TabIndex = 18;
+            this.txtThickness.Text = "3";
+            this.txtThickness.Leave += new System.EventHandler(this.txtThickness_Leave);
+            // 
+            // lblThickness
+            // 
+            this.lblThickness.AutoSize = true;
+            this.lblThickness.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThickness.Location = new System.Drawing.Point(881, 29);
+            this.lblThickness.Name = "lblThickness";
+            this.lblThickness.Size = new System.Drawing.Size(101, 23);
+            this.lblThickness.TabIndex = 19;
+            this.lblThickness.Text = "Thickness:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -387,6 +414,8 @@ namespace MIDTERM_PROJECTS
         private ToolStrip toolStrip3;
         private ToolStripButton btnClear;
         private ToolStripButton toolStripButton1;
+        private System.Windows.Forms.TextBox txtThickness;
+        private Label lblThickness;
     }
 }
 

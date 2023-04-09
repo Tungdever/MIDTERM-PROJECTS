@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.Devices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MIDTERM_PROJECTS
 {
@@ -243,7 +244,7 @@ namespace MIDTERM_PROJECTS
             if (isClickColtrols)
             {
                 myColor = cldControls.Color;
-                Pen myPen = new Pen(myColor, 3);
+                Pen myPen = new Pen(myColor, int.Parse(txtThickness.Text));
                 if (isSolid) myPen.DashStyle = DashStyle.Solid;
                 else if (isDash) myPen.DashStyle = DashStyle.Dash;
                 else if (isDot) myPen.DashStyle = DashStyle.Dot;
@@ -1125,6 +1126,22 @@ namespace MIDTERM_PROJECTS
                 graphics.Remove(gp);
             }
             this.pnlMain.Refresh();
+        }
+
+        private void txtThickness_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtThickness.Text)) // Nếu TextBox trống
+            {
+                txtThickness.Text = "3";            
+            }
+        }
+
+        private void pnlMain_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtThickness.Text)) // Nếu TextBox trống
+            {
+                txtThickness.Text = "3";
+            }
         }
 
         private void pnlMain_Paint(object sender, PaintEventArgs e)
