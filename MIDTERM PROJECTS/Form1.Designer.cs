@@ -32,6 +32,7 @@ namespace MIDTERM_PROJECTS
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnFilled_Polygon = new System.Windows.Forms.Button();
             this.btnpPolygon = new System.Windows.Forms.Button();
@@ -46,6 +47,8 @@ namespace MIDTERM_PROJECTS
             this.cldControls = new System.Windows.Forms.ColorDialog();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlControls = new System.Windows.Forms.Panel();
+            this.lblThickness = new System.Windows.Forms.Label();
+            this.txtThickness = new System.Windows.Forms.TextBox();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.btnClear = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -58,13 +61,15 @@ namespace MIDTERM_PROJECTS
             this.btnDashDotType = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDashDotDotType = new System.Windows.Forms.ToolStripMenuItem();
             this.ptbColor = new System.Windows.Forms.PictureBox();
-            this.txtThickness = new System.Windows.Forms.TextBox();
-            this.lblThickness = new System.Windows.Forms.Label();
+            this.ctmGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctmItemUngroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctmItemGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlControls.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbColor)).BeginInit();
+            this.ctmGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnFilled_Polygon
@@ -212,6 +217,28 @@ namespace MIDTERM_PROJECTS
             this.pnlControls.Size = new System.Drawing.Size(1298, 121);
             this.pnlControls.TabIndex = 14;
             // 
+            // lblThickness
+            // 
+            this.lblThickness.AutoSize = true;
+            this.lblThickness.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThickness.Location = new System.Drawing.Point(881, 29);
+            this.lblThickness.Name = "lblThickness";
+            this.lblThickness.Size = new System.Drawing.Size(101, 23);
+            this.lblThickness.TabIndex = 19;
+            this.lblThickness.Text = "Thickness:";
+            // 
+            // txtThickness
+            // 
+            this.txtThickness.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtThickness.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtThickness.Location = new System.Drawing.Point(1000, 26);
+            this.txtThickness.Multiline = true;
+            this.txtThickness.Name = "txtThickness";
+            this.txtThickness.Size = new System.Drawing.Size(87, 30);
+            this.txtThickness.TabIndex = 18;
+            this.txtThickness.Text = "3";
+            this.txtThickness.Leave += new System.EventHandler(this.txtThickness_Leave);
+            // 
             // toolStrip3
             // 
             this.toolStrip3.BackColor = System.Drawing.SystemColors.Control;
@@ -344,27 +371,28 @@ namespace MIDTERM_PROJECTS
             this.ptbColor.TabStop = false;
             this.ptbColor.Click += new System.EventHandler(this.ptbColor_Click);
             // 
-            // txtThickness
+            // ctmGroup
             // 
-            this.txtThickness.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtThickness.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtThickness.Location = new System.Drawing.Point(1000, 26);
-            this.txtThickness.Multiline = true;
-            this.txtThickness.Name = "txtThickness";
-            this.txtThickness.Size = new System.Drawing.Size(87, 30);
-            this.txtThickness.TabIndex = 18;
-            this.txtThickness.Text = "3";
-            this.txtThickness.Leave += new System.EventHandler(this.txtThickness_Leave);
+            this.ctmGroup.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ctmGroup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctmItemGroup,
+            this.ctmItemUngroup});
+            this.ctmGroup.Name = "ctmGroup";
+            this.ctmGroup.Size = new System.Drawing.Size(211, 80);
             // 
-            // lblThickness
+            // ctmItemUngroup
             // 
-            this.lblThickness.AutoSize = true;
-            this.lblThickness.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThickness.Location = new System.Drawing.Point(881, 29);
-            this.lblThickness.Name = "lblThickness";
-            this.lblThickness.Size = new System.Drawing.Size(101, 23);
-            this.lblThickness.TabIndex = 19;
-            this.lblThickness.Text = "Thickness:";
+            this.ctmItemUngroup.Name = "ctmItemUngroup";
+            this.ctmItemUngroup.Size = new System.Drawing.Size(210, 24);
+            this.ctmItemUngroup.Text = "Ungroup";
+            this.ctmItemUngroup.Click += new System.EventHandler(this.ctmItemUngroup_Click);
+            // 
+            // ctmItemGroup
+            // 
+            this.ctmItemGroup.Name = "ctmItemGroup";
+            this.ctmItemGroup.Size = new System.Drawing.Size(210, 24);
+            this.ctmItemGroup.Text = "Group";
+            this.ctmItemGroup.Click += new System.EventHandler(this.ctmItemGroup_Click);
             // 
             // Form1
             // 
@@ -384,6 +412,7 @@ namespace MIDTERM_PROJECTS
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbColor)).EndInit();
+            this.ctmGroup.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -416,6 +445,9 @@ namespace MIDTERM_PROJECTS
         private ToolStripButton toolStripButton1;
         private System.Windows.Forms.TextBox txtThickness;
         private Label lblThickness;
+        private ContextMenuStrip ctmGroup;
+        private ToolStripMenuItem ctmItemUngroup;
+        private ToolStripMenuItem ctmItemGroup;
     }
 }
 

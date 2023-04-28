@@ -365,23 +365,12 @@ namespace MIDTERM_PROJECTS
                             }                            
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach(Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-                                    
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled= false;
+                                    ctmGroup.Show(pnlMain,e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -390,7 +379,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -403,6 +394,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is Elipse elipse)
                     {
+                        // tính vị trí click chuột có focus vào hình không
                         double dx = e.X - elipse.center.X;
                         double dy = e.Y - elipse.center.Y;
                         double distance = Math.Pow(dx / elipse.a, 2) + Math.Pow(dy / elipse.b, 2);
@@ -425,23 +417,12 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach (Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled = false;
+                                    ctmGroup.Show(pnlMain, e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -450,7 +431,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -462,6 +445,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is FillElipse fill_elipse)
                     {
+                        // tính vị trí click chuột có focus vào hình không
                         double dx = e.X - fill_elipse.center.X;
                         double dy = e.Y - fill_elipse.center.Y;
                         double distance = Math.Pow(dx / fill_elipse.a, 2) + Math.Pow(dy / fill_elipse.b, 2);
@@ -484,23 +468,12 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach (Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled = false;
+                                    ctmGroup.Show(pnlMain, e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -509,7 +482,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -521,6 +496,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is RectangleGraphic rectangle)
                     {
+                        // tính vị trí click chuột có focus vào hình không
                         int xMin = Math.Min(rectangle.p1.X, rectangle.p2.X);
                         int yMin = Math.Min(rectangle.p1.Y, rectangle.p2.Y);
                         int width = Math.Abs(rectangle.p2.X - rectangle.p1.X);
@@ -538,23 +514,12 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach (Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled = false;
+                                    ctmGroup.Show(pnlMain, e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -563,7 +528,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -575,6 +542,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is FillRectangle fill_rectangle)
                     {
+                        // tính vị trí click chuột có focus vào hình không
                         int xMin = Math.Min(fill_rectangle.p1.X, fill_rectangle.p2.X);
                         int yMin = Math.Min(fill_rectangle.p1.Y, fill_rectangle.p2.Y);
                         int width = Math.Abs(fill_rectangle.p2.X - fill_rectangle.p1.X);
@@ -592,23 +560,12 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach (Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled = false;
+                                    ctmGroup.Show(pnlMain, e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -617,7 +574,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -629,6 +588,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is Circle circle)
                     {
+                        // tính vị trí click chuột có focus vào hình không
                         double distance = Math.Sqrt(Math.Pow(e.X - circle.center.X, 2) + Math.Pow(e.Y - circle.center.Y, 2));
                         posZoom = circle.getPosZoom(e.X, e.Y);
                         if (posZoom != -1 && selected.Contains(circle))
@@ -649,23 +609,12 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach (Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled = false;
+                                    ctmGroup.Show(pnlMain, e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -674,7 +623,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -686,6 +637,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is FillCircle fill_circle)
                     {
+                        // tính vị trí click chuột có focus vào hình không
                         double distance = Math.Sqrt(Math.Pow(e.X - fill_circle.center.X, 2) + Math.Pow(e.Y - fill_circle.center.Y, 2));
                         posZoom = fill_circle.getPosZoom(e.X, e.Y);
                         if (posZoom != -1 && selected.Contains(fill_circle))
@@ -706,23 +658,12 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach (Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled = false;
+                                    ctmGroup.Show(pnlMain, e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -731,7 +672,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -762,23 +705,12 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach (Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled = false;
+                                    ctmGroup.Show(pnlMain, e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -787,7 +719,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -800,6 +734,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is Polygon polygon)
                     {
+                        // tính vị trí click chuột có focus vào hình không
                         int minX = int.MaxValue, maxX = int.MinValue, minY = int.MaxValue, maxY = int.MinValue;
                         foreach (Point point in polygon.lPoint)
                         {
@@ -839,23 +774,12 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach (Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled = false;
+                                    ctmGroup.Show(pnlMain, e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -864,7 +788,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -876,6 +802,7 @@ namespace MIDTERM_PROJECTS
                     }
                     else if (graphics[i] is FillPolygon fill_polygon)
                     {
+                        // tính vị trí click chuột có focus vào hình không
                         int minX = int.MaxValue, maxX = int.MinValue, minY = int.MaxValue, maxY = int.MinValue;
                         foreach (Point point in fill_polygon.lPoint)
                         {
@@ -915,23 +842,12 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right)
                                 {
-                                    GroupGraphics polyOjb = new GroupGraphics();
-                                    foreach (Graphic item in selected)
-                                    {
-                                        polyOjb.graphics.Add(item);
-                                    }
-                                    graphics.Add(polyOjb);
-
-                                    foreach (Graphic item in selected)
-                                    {
-                                        graphics.Remove(item);
-                                    }
-                                    selected.Clear();
-                                    selected.Add(polyOjb);
-                                    this.pnlMain.Refresh();
+                                    ctmItemUngroup.Enabled = false;
+                                    ctmGroup.Show(pnlMain, e.Location);
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -940,7 +856,9 @@ namespace MIDTERM_PROJECTS
                             {
                                 isSelected = true;
                                 x = e.X; y = e.Y;
+                                // thêm hình được focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Add(graphics[i]);
+                                // nếu không ấn ctrl + chuột trái thì đây là hình được focus
                                 else
                                 {
                                     selected.Clear();
@@ -951,7 +869,8 @@ namespace MIDTERM_PROJECTS
                         }
                     }
                     else if (graphics[i] is GroupGraphics gg)
-                    {                     
+                    {
+                        // tính vị trí click chuột có focus vào hình không
                         posZoom = gg.getPosZoom(e.X, e.Y);
                         if (e.X >= gg.minX - 10 && e.X <= gg.maxX + 10 && e.Y >= gg.minY - 10 && e.Y <= gg.maxY + 10)
                         {
@@ -965,36 +884,13 @@ namespace MIDTERM_PROJECTS
                             }
                             else if (selected.Contains(graphics[i]))
                             {
+                                // Remove focus
                                 if (ModifierKeys == Keys.Control && e.Button == MouseButtons.Left) selected.Remove(graphics[i]);
                                 else if (e.Button == MouseButtons.Right )
                                 {
-                                    if (selected.Count > 1)
-                                    {
-                                        GroupGraphics polyObj = new GroupGraphics();
-                                        foreach (Graphic item in selected)
-                                        {
-                                            polyObj.graphics.Add(item);
-                                        }
-                                        graphics.Add(polyObj);
-
-                                        foreach (Graphic item in selected)
-                                        {
-                                            graphics.Remove(item);
-                                        }
-                                        selected.Clear();
-                                        selected.Add(polyObj);
-                                        this.pnlMain.Refresh();
-                                    }
-                                    else
-                                    {
-                                        foreach (Graphic item in gg.graphics)
-                                        {
-                                            graphics.Add(item);
-                                            selected.Add(item);
-                                        }
-                                        graphics.Remove(gg);
-                                        selected.Remove(gg);
-                                    }
+                                    ctmItemUngroup.Enabled = true;
+                                    ctmGroup.Show(pnlMain, e.Location);
+                                    ctmGroup.Tag = gg;
                                 }
                                 isSelected = true;
                                 x = e.X; y = e.Y;
@@ -1142,6 +1038,41 @@ namespace MIDTERM_PROJECTS
             {
                 txtThickness.Text = "3";
             }
+        }
+
+        private void ctmItemGroup_Click(object sender, EventArgs e)
+        {
+            // Group
+            // tạo 1 hình hỗn hợp chứa list các hình con
+            GroupGraphics polyOjb = new GroupGraphics();
+            foreach (Graphic item in selected)
+            {
+                polyOjb.graphics.Add(item);
+            }
+            // thêm hình hỗn hợp mới tạo vào danh sách các hình được vẽ 
+            graphics.Add(polyOjb);
+            // xoá các hình là con của hình con hợp ra khỏi danh sách các hình được vẽ
+            foreach (Graphic item in selected)
+            {
+                graphics.Remove(item);
+            }
+            // hình được focus là hình hỗn hợp
+            selected.Clear();
+            selected.Add(polyOjb);
+            this.pnlMain.Refresh();
+        }
+
+        private void ctmItemUngroup_Click(object sender, EventArgs e)
+        {
+            // Ungroup
+            selected.Clear();
+            foreach (Graphic item in (ctmGroup.Tag as GroupGraphics).graphics)
+            {
+                graphics.Add(item);
+                selected.Add(item);
+            }
+            graphics.Remove(ctmGroup.Tag as GroupGraphics);
+            this.pnlMain.Refresh();
         }
 
         private void pnlMain_Paint(object sender, PaintEventArgs e)
