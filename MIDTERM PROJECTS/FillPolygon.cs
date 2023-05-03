@@ -105,7 +105,7 @@ namespace MIDTERM_PROJECTS
             {
                 if (mouseDownX >= lPoint[i].X - 10 && mouseDownX <= lPoint[i].X + 10 && mouseDownY >= lPoint[i].Y - 10 && mouseDownY <= lPoint[i].Y + 10)
                 {
-                    return i;
+                    return i + 10;
                 }
             }
             return -1;

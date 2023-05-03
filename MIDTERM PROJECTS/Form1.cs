@@ -21,6 +21,7 @@ namespace MIDTERM_PROJECTS
     public partial class Form1 : Form
     {
         Color myColor;
+        // các biến check cho các buttton chọn hình vẽ
         bool isLine = false;
         bool isEllipse = false;
         bool isPress = false;
@@ -40,10 +41,15 @@ namespace MIDTERM_PROJECTS
         bool isDot = false;
         bool isDashDot = false;
         bool isDashDotDot = false;
+        // list chứa đỉnh của polygon
         List<Point> lSides;
+        // list chứa các hình đã vẽ trên pnl main
         List<Graphic> graphics = new List<Graphic>();
+        // list đang hình đang được focus
         List<Graphic> selected = new List<Graphic>();
+        // toạ đọ của vị trí chuột mousedown
         int x, y;
+        // vị trí zoom hình
         int posZoom;
         public static void Swap(ref int a, ref int b)
         {
@@ -204,7 +210,7 @@ namespace MIDTERM_PROJECTS
         }
         private void btnFilled_Polygon_Click(object sender, EventArgs e)
         {            
-            string input = Microsoft.VisualBasic.Interaction.InputBox("Enter the number of sides:", "Polygon", "5");
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Enter the number of sides:", "Filled Polygon", "5");
             if (!int.TryParse(input, out numSides))
             {
                 MessageBox.Show("Invalid input!");
