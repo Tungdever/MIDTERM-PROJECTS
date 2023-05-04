@@ -62,8 +62,8 @@ namespace MIDTERM_PROJECTS
             this.btnDashDotDotType = new System.Windows.Forms.ToolStripMenuItem();
             this.ptbColor = new System.Windows.Forms.PictureBox();
             this.ctmGroup = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ctmItemUngroup = new System.Windows.Forms.ToolStripMenuItem();
             this.ctmItemGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctmItemUngroup = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlControls.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -74,9 +74,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnFilled_Polygon
             // 
-            this.btnFilled_Polygon.Location = new System.Drawing.Point(237, 65);
+            this.btnFilled_Polygon.Location = new System.Drawing.Point(465, 65);
             this.btnFilled_Polygon.Name = "btnFilled_Polygon";
-            this.btnFilled_Polygon.Size = new System.Drawing.Size(113, 38);
+            this.btnFilled_Polygon.Size = new System.Drawing.Size(132, 38);
             this.btnFilled_Polygon.TabIndex = 9;
             this.btnFilled_Polygon.Text = "Filled Polygon";
             this.btnFilled_Polygon.UseVisualStyleBackColor = true;
@@ -84,9 +84,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnpPolygon
             // 
-            this.btnpPolygon.Location = new System.Drawing.Point(123, 65);
+            this.btnpPolygon.Location = new System.Drawing.Point(356, 65);
             this.btnpPolygon.Name = "btnpPolygon";
-            this.btnpPolygon.Size = new System.Drawing.Size(108, 38);
+            this.btnpPolygon.Size = new System.Drawing.Size(103, 38);
             this.btnpPolygon.TabIndex = 8;
             this.btnpPolygon.Text = "Polygon";
             this.btnpPolygon.UseVisualStyleBackColor = true;
@@ -104,9 +104,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnFilled_Circle
             // 
-            this.btnFilled_Circle.Location = new System.Drawing.Point(465, 65);
+            this.btnFilled_Circle.Location = new System.Drawing.Point(237, 65);
             this.btnFilled_Circle.Name = "btnFilled_Circle";
-            this.btnFilled_Circle.Size = new System.Drawing.Size(132, 38);
+            this.btnFilled_Circle.Size = new System.Drawing.Size(113, 38);
             this.btnFilled_Circle.TabIndex = 6;
             this.btnFilled_Circle.Text = "Filled Circle";
             this.btnFilled_Circle.UseVisualStyleBackColor = true;
@@ -114,9 +114,9 @@ namespace MIDTERM_PROJECTS
             // 
             // btnCircle
             // 
-            this.btnCircle.Location = new System.Drawing.Point(356, 65);
+            this.btnCircle.Location = new System.Drawing.Point(123, 65);
             this.btnCircle.Name = "btnCircle";
-            this.btnCircle.Size = new System.Drawing.Size(103, 38);
+            this.btnCircle.Size = new System.Drawing.Size(108, 38);
             this.btnCircle.TabIndex = 5;
             this.btnCircle.Text = "Circle";
             this.btnCircle.UseVisualStyleBackColor = true;
@@ -195,6 +195,8 @@ namespace MIDTERM_PROJECTS
             // pnlControls
             // 
             this.pnlControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlControls.Controls.Add(this.btnFilled_Polygon);
+            this.pnlControls.Controls.Add(this.btnpPolygon);
             this.pnlControls.Controls.Add(this.lblThickness);
             this.pnlControls.Controls.Add(this.txtThickness);
             this.pnlControls.Controls.Add(this.toolStrip3);
@@ -205,9 +207,7 @@ namespace MIDTERM_PROJECTS
             this.pnlControls.Controls.Add(this.btnArc);
             this.pnlControls.Controls.Add(this.ptbColor);
             this.pnlControls.Controls.Add(this.btnFilled_Ellipse);
-            this.pnlControls.Controls.Add(this.btnpPolygon);
             this.pnlControls.Controls.Add(this.btnCircle);
-            this.pnlControls.Controls.Add(this.btnFilled_Polygon);
             this.pnlControls.Controls.Add(this.btnLine);
             this.pnlControls.Controls.Add(this.btnFilled_Circle);
             this.pnlControls.Controls.Add(this.btnEllipse);
@@ -378,21 +378,21 @@ namespace MIDTERM_PROJECTS
             this.ctmItemGroup,
             this.ctmItemUngroup});
             this.ctmGroup.Name = "ctmGroup";
-            this.ctmGroup.Size = new System.Drawing.Size(211, 80);
-            // 
-            // ctmItemUngroup
-            // 
-            this.ctmItemUngroup.Name = "ctmItemUngroup";
-            this.ctmItemUngroup.Size = new System.Drawing.Size(210, 24);
-            this.ctmItemUngroup.Text = "Ungroup";
-            this.ctmItemUngroup.Click += new System.EventHandler(this.ctmItemUngroup_Click);
+            this.ctmGroup.Size = new System.Drawing.Size(137, 52);
             // 
             // ctmItemGroup
             // 
             this.ctmItemGroup.Name = "ctmItemGroup";
-            this.ctmItemGroup.Size = new System.Drawing.Size(210, 24);
+            this.ctmItemGroup.Size = new System.Drawing.Size(136, 24);
             this.ctmItemGroup.Text = "Group";
             this.ctmItemGroup.Click += new System.EventHandler(this.ctmItemGroup_Click);
+            // 
+            // ctmItemUngroup
+            // 
+            this.ctmItemUngroup.Name = "ctmItemUngroup";
+            this.ctmItemUngroup.Size = new System.Drawing.Size(136, 24);
+            this.ctmItemUngroup.Text = "Ungroup";
+            this.ctmItemUngroup.Click += new System.EventHandler(this.ctmItemUngroup_Click);
             // 
             // Form1
             // 

@@ -34,8 +34,11 @@ namespace MIDTERM_PROJECTS
         bool isArc = false;
         bool isPolygon = false;
         bool isFillPolygon = false;
+        // số đỉnh của polygon 
         int numSides;
+        // có hình đang được chọn hay không
         bool isSelected = false;
+        // các kiểu style của pen
         bool isSolid = true;
         bool isDash = false;
         bool isDot = false;
@@ -51,12 +54,6 @@ namespace MIDTERM_PROJECTS
         int x, y;
         // vị trí zoom hình
         int posZoom;
-        public static void Swap(ref int a, ref int b)
-        {
-            int temp = a;
-            a = b;
-            b = temp;
-        }
         public Form1()
         {
             InitializeComponent();
@@ -249,6 +246,7 @@ namespace MIDTERM_PROJECTS
         {
             if (isClickColtrols)
             {
+                // setup pen
                 myColor = cldControls.Color;
                 Pen myPen = new Pen(myColor, int.Parse(txtThickness.Text));
                 if (isSolid) myPen.DashStyle = DashStyle.Solid;
@@ -997,7 +995,7 @@ namespace MIDTERM_PROJECTS
         }
         private void btnDashDotType_Click(object sender, EventArgs e)
         {
-            isDash = false; isSolid = false; isDot = false; isDashDot = false; isDashDotDot = false;
+            isDash = false; isSolid = false; isDot = false; isDashDot = true; isDashDotDot = false;
             btnsplitStyle.Text = btnDashDotType.Text;
             btnsplitStyle.Image = global::MIDTERM_PROJECTS.Properties.Resources.dashed_line_240px;
         }

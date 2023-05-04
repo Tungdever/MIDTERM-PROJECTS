@@ -45,10 +45,7 @@ namespace MIDTERM_PROJECTS
             { 
             }
             path = new GraphicsPath();
-            path.AddArc(centerX-radius,centerY-radius,radius*2f,radius*2f,startAngle,endAngle);
-            //RectangleF bounds = path.GetBounds();
-            //a = bounds.Width / 2;
-            //b = bounds.Height / 2;
+            path.AddArc(centerX-radius,centerY-radius,radius*2f,radius*2f,startAngle,endAngle);           
             if (isSelected)
             {
                 Brush myBrush;
